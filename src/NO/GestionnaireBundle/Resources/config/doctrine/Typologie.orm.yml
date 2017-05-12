@@ -1,0 +1,15 @@
+NO\GestionnaireBundle\Entity\Typologie:
+  type: entity
+  table: typologie
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+  fields:
+    nomTypologie:
+      type: string
+      length: 255
+      nullable: true
+      column: nom_typologie
+    

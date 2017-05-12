@@ -1,0 +1,24 @@
+NO\GestionnaireBundle\Entity\GrilleTarif:
+  type: entity
+  table: grilleTarif
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+  fields:
+    tarif:
+      type: integer
+      nullable: true
+      column: tarif
+  manyToOne:
+    profil:
+      targetEntity: NO\GestionnaireBundle\Entity\Profil
+      joinColumns:
+        profil_id:
+          referencedColumnName: id
+    projet:
+      targetEntity: NO\GestionnaireBundle\Entity\Projet
+      joinColumns:
+        projet_id:
+          referencedColumnName: id

@@ -1,0 +1,14 @@
+NO\GestionnaireBundle\Entity\Pole:
+  type: entity
+  table: pole
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+  fields:
+    nomPole:
+      type: string
+      length: 255
+      nullable: true
+      column: nom_pole

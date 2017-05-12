@@ -1,0 +1,44 @@
+NO\GestionnaireBundle\Entity\User:
+  type: entity
+  table: user
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+  fields:
+    nomUser:
+      type: string
+      length: 255
+      nullable: true
+      column: nom_user
+    password:
+      type: string
+      length: 255
+      nullable: true
+      column: password
+  manyToMany:
+    poles:
+      targetEntity: NO\GestionnaireBundle\Entity\Pole
+      joinTable:
+        name: poleToUser
+        joinColumns:
+          user_id:
+            referencedColumnName: id
+            unique: true
+        inverseJoinColumns:
+          pole_id:
+            referencedColumnName: id
+    roles:
+      targetEntity: NO\GestionnaireBundle\Entity\Role
+      joinTable:
+        name: roleToUser
+        joinColumns:
+          user_id:
+            referencedColumnName: id
+            unique: true
+        inverseJoinColumns:
+          role_id:
+            referencedColumnName: id
+          
+          

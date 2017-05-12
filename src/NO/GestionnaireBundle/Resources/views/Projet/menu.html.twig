@@ -1,0 +1,10 @@
+<div>
+	<h4>Poles existants</h4>
+	<ul class="nav nav-pills nav-stacked">	
+		{% for pole in poles %}
+			<li>
+				<a href="{{ path('no_gestionnaire_modification', {'id': pole.id }) }}">{{ pole.nomPole }}</a>
+			</li>	
+		{% endfor %}
+	</ul>
+</div>	

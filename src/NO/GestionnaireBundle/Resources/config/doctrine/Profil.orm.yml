@@ -1,0 +1,14 @@
+NO\GestionnaireBundle\Entity\Profil:
+  type: entity
+  table: profil
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+  fields:
+    nomProfil:
+      type: string
+      length: 255
+      nullable: true
+      column: nom_profil

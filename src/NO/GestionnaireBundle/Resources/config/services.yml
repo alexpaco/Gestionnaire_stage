@@ -1,0 +1,4 @@
+services:
+#    no_gestionnaire.example:
+#        class: NO\GestionnaireBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]

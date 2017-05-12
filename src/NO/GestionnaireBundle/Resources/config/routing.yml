@@ -1,0 +1,17 @@
+no_gestionnaire_homepage:
+    path:     /test
+    defaults: { _controller: NOGestionnaireBundle:Default:index }
+no_gestionnaire_suivi:
+    path:     /suivi_projet
+    defaults: { _controller: NOGestionnaireBundle:Projet:suivi }
+no_gestionnaire_ajout:
+    path:     /ajout_projet
+    defaults: { _controller: NOGestionnaireBundle:Projet:ajout }
+no_gestionnaire_modification:
+    path:     /modification_projet/{id}
+    defaults: { _controller: NOGestionnaireBundle:Projet:modification }
+    requirements:
+        id: \d+
+no_gestionnaire_admin:
+    path:     /espace_admin
+    defaults: { _controller: NOGestionnaireBundle:Projet:admin }

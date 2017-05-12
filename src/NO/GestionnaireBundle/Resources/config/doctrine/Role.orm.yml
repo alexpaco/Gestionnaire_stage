@@ -1,0 +1,16 @@
+NO\GestionnaireBundle\Entity\Role:
+  type: entity
+  table: role
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+  fields:
+    nomRole:
+      type: string
+      length: 255
+      nullable: true
+      column: nom_role
+    
+

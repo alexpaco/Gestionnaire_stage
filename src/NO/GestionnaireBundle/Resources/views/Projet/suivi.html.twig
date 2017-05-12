@@ -1,0 +1,9 @@
+{%extends "NOGestionnaireBundle::layout.html.twig" %}
+{% block title %}
+	Suivi de projet - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+	<h3>Je suis la page de suivi</h3>
+	<a href="{{ path('no_gestionnaire_homepage') }}" class="btn btn-default"><i class="glyphicon glyphicon-chevron-left"></i>Retour à l'accueil</a>
+{% endblock %}

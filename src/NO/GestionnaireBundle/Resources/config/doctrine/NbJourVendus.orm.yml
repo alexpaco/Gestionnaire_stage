@@ -1,0 +1,25 @@
+NO\GestionnaireBundle\Entity\NbJourVendus:
+  type: entity
+  table: nbJourVendus
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+  fields:
+    joursVendus:
+      type: decimal
+      scale: 1
+      nullable: true
+      column: jours_vendus
+  manyToOne:
+    tache:
+      targetEntity: NO\GestionnaireBundle\Entity\Tache
+      joinColumns:
+        tache_id:
+          referencedColumnName: id
+    profil:
+      targetEntity: NO\GestionnaireBundle\Entity\Profil
+      joinColumns:
+        profil_id:
+          referencedColumnName: id

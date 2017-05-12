@@ -1,0 +1,60 @@
+<h3>Ajout d'un projet</h3>
+
+<div class="well">
+	{{ form_start(formProjet, {'attr': {'class': 'form-horizontal'}}) }}
+
+	{{ form_errors(formProjet) }}
+	<div class="form-group">
+		{{ form_label(formProjet.nomProjet, "Nom du projet", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+		{{ form_errors(formProjet.nomProjet) }}
+		<div class="col-sm-8">
+			{{form_widget(formProjet.nomProjet) }}
+		</div>
+	</div>
+	<div class="form-group">
+		{{ form_label(formProjet.clients, "Client", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+		{{ form_errors(formProjet.clients) }}
+		<div class="col-sm-8">
+			{{form_widget(formProjet.clients) }}
+		</div>
+	</div>
+	<div class="form-group">
+		{{ form_label(formProjet.poles, "Pole", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+		{{ form_errors(formProjet.poles) }}
+		<div class="col-sm-8">
+			{{form_widget(formProjet.poles) }}
+		</div>
+	</div>
+	<div class="form-group">
+		{{ form_label(formProjet.dateDebut, "Démarrage du projet", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+		{{ form_errors(formProjet.dateDebut) }}
+		<div class="col-sm-8">
+			{{form_widget(formProjet.dateDebut) }}
+		</div>
+	</div>
+	<div class="form-group">
+		{{ form_label(formProjet.dateFin, "Fin du projet", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+		{{ form_errors(formProjet.dateFin) }}
+		<div class="col-sm-8">
+			{{form_widget(formProjet.dateFin) }}
+		</div>
+	</div>
+	<div class="form-group">
+		{{ form_label(formProjet.typologies, "Typologie du projet", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+		{{ form_errors(formProjet.typologies) }}
+		<div class="col-sm-8">
+			{{form_widget(formProjet.typologies) }}
+		</div>
+	</div>
+	<div class="form-group">
+		{{ form_label(formProjet.users, "Responsable et suppléant", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+		{{ form_errors(formProjet.users) }}
+		<div class="col-sm-8">
+			{{form_widget(formProjet.users) }}
+		</div>
+	</div>
+	{{ form_widget(formProjet.Ajouter, {'attr': {'class': 'btn btn-primary'}}) }}
+
+	{{ form_rest(formProjet) }}
+	{{ form_end(formProjet) }}
+</div>	

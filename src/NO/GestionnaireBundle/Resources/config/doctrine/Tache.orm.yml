@@ -1,0 +1,45 @@
+NO\GestionnaireBundle\Entity\Tache:
+  type: entity
+  table: tache
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+  fields:
+    nomTache:
+      type: string
+      length: 255
+      nullable: true
+      column: nom_tache
+    niveau:
+      type: integer
+      nullable: true
+      column: niveau
+    ordre:
+      type: integer
+      nullable: true
+      column: ordre
+    joursRealises:
+      type: decimal
+      scale: 1
+      nullable: true
+      column: jours_réalisés
+    raf:
+      type: decimal
+      scale: 1
+      nullable: true
+      column: raf
+  manyToMany:
+    projets:
+      targetEntity: NO\GestionnaireBundle\Entity\Projet
+      joinTable:
+        name: tacheToProjet
+        joinColumns:
+          tache_id:
+            referencedColumnName: id
+            unique: true
+        inverseJoinColumns:
+          projet_id:
+            referencedColumnName: id
+          

@@ -1,0 +1,6 @@
+no_gestionnaire:
+    resource: "@NOGestionnaireBundle/Resources/config/routing.yml"
+    prefix:   /
+
+#for_user:
+#    resource: "@FOSUserBundle/Resources/config/routing/all.yml"

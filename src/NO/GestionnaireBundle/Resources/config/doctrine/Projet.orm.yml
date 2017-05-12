@@ -1,0 +1,69 @@
+NO\GestionnaireBundle\Entity\Projet:
+  type: entity
+  table: projet
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+  fields:
+    nomProjet:
+      type: string
+      length: 255
+      nullable: true
+      column: nom_projet
+    dateDebut:
+      type: date
+      nullable: true
+      column: date_debut
+    dateFin:
+      type: date
+      nullable: true
+      column: date_fin
+  manyToMany:
+    users:
+      targetEntity: NO\GestionnaireBundle\Entity\User
+      joinTable:
+        name: usersToProjet
+        joinColumns:
+          projet_id:
+            referencedColumnName: id
+        inverseJoinColumns:
+          user_id:
+            referencedColumnName: id
+    clients:
+      targetEntity: NO\GestionnaireBundle\Entity\Client
+      joinTable:
+        name: clientToProjet
+        joinColumns:
+          projet_id:
+            referencedColumnName: id
+            nullable: false
+            unique: true
+        inverseJoinColumns:
+          client_id:
+            referencedColumnName: id
+            nullable: false
+    poles:
+      targetEntity: NO\GestionnaireBundle\Entity\Pole
+      joinTable:
+        name: poleToProjet
+        joinColumns:
+          projet_id:
+            referencedColumnName: id
+            unique: true
+        inverseJoinColumns:
+          pole_id:
+            referencedColumnName: id
+    typologies:
+      targetEntity: NO\GestionnaireBundle\Entity\Typologie
+      joinTable:
+        name: typologieToProjet
+        joinColumns:
+          typologie_id:
+            referencedColumnName: id
+        inverseJoinColumns:
+          projet_id:
+            referencedColumnName: id
+            unique: true
+          
