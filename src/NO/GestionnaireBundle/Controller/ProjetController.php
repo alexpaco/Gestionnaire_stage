@@ -10,10 +10,12 @@ use NO\GestionnaireBundle\Form\PoleType;
 use NO\GestionnaireBundle\Form\TypologieType;
 use NO\GestionnaireBundle\Form\ClientType;
 use NO\GestionnaireBundle\Form\ProjetType;
+use NO\GestionnaireBundle\Form\UserType;
 use NO\GestionnaireBundle\Entity\Typologie;
 use NO\GestionnaireBundle\Entity\Pole;
 use NO\GestionnaireBundle\Entity\Projet;
 use NO\GestionnaireBundle\Entity\Client;
+use NO\GestionnaireBundle\Entity\User;
 class ProjetController extends Controller
 {
 	public function suiviAction()
@@ -68,12 +70,14 @@ class ProjetController extends Controller
 		$client = new Client();
 		$pole = new Pole();
 		$typologie = new Typologie();
+		$user = new User();
 
 		$formClient = $this->get('form.factory')->create(ClientType::class, $client);
     	$formPole = $this->get('form.factory')->create(PoleType::class, $pole);
     	$formTypologie = $this->get('form.factory')->create(TypologieType::class, $typologie);
+    	$formUser = $this->get('form.factory')->create(UserType::class, $user);
 
-    	if($request->isMethod('POST') & $formClient->handleRequest($request)->isSubmitted())
+    	if($request->isMethod('POST') && $formClient->handleRequest($request)->isSubmitted())
     	{
     		$em->persist($client);
     		$em->flush();
@@ -95,11 +99,19 @@ class ProjetController extends Controller
 
 			return $this->redirectToRoute('no_gestionnaire_admin');
 		}
+		if($request->isMethod('POST') && $formUser->handleRequest($request)->isSubmitted())
+		{
+			$em->persist($user);
+			$em->flush();
+
+			return $this->redirectToRoute('no_gestionnaire_admin');
+		}
 
 		return $this->render('NOGestionnaireBundle:Projet:admin.html.twig', array(
         	'formPole' =>$formPole->createView(),
         	'formTypologie' => $formTypologie->createView(),
-        	'formClient' => $formClient->createView()
+        	'formClient' => $formClient->createView(),
+        	'formUser' =>$formUser->createView()
         ));
 	}
 
@@ -107,13 +119,13 @@ class ProjetController extends Controller
 
 		$em = $this->getDoctrine()->getManager();
 
-    	$client = $em->getRepository('NOGestionnaireBundle:Client')->findBy(array(), array('nomClient' => 'desc'));
+		$projets = $em->getRepository('NOGestionnaireBundle:Projet')->findBy(array(), array('nomProjet' => 'asc'));
 
     	$poles = $em->getRepository('NOGestionnaireBundle:Pole')->findBy(array(), array('nomPole' => 'asc'));
 
         return $this->render('NOGestionnaireBundle:Projet:menu.html.twig', array(
-        	'clients' => $client,
-        	'poles' => $poles
+        	'poles' => $poles,
+        	'projets' => $projets,
         ));
 	}	
 }

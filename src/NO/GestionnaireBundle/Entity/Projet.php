@@ -2,6 +2,9 @@
 
 namespace NO\GestionnaireBundle\Entity;
 
+
+use Doctrine\Common\Collections\ArrayCollection;
+
 /**
  * Projet
  */
@@ -27,12 +30,24 @@ class Projet
      */
     private $dateFin;
 
+    /**
+     * @var ArrayCollection
+    */
     private $users;
 
+    /**
+     * @var \NO\GestionnaireBundle\Entity\Client
+     */
     private $clients;
 
+    /**
+     * @var \NO\GestionnaireBundle\Entity\Pole
+     */
     private $poles;
 
+    /**
+     * @var \NO\GestionnaireBundle\Entity\Typologie
+     */
     private $typologies;
     /**
      * Get id
@@ -120,10 +135,7 @@ class Projet
      */
     public function __construct()
     {
-        $this->users = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->clients = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->poles = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->typologies = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->users = new ArrayCollection();
     }
 
     /**
@@ -161,33 +173,23 @@ class Projet
     }
 
     /**
-     * Add client
+     * Set clients
      *
-     * @param \NO\GestionnaireBundle\Entity\Client $client
+     * @param \NO\GestionnaireBundle\Entity\Client $clients
      *
      * @return Projet
      */
-    public function addClient(\NO\GestionnaireBundle\Entity\Client $client)
+    public function setClients(\NO\GestionnaireBundle\Entity\Client $clients = null)
     {
-        $this->clients[] = $client;
+        $this->clients = $clients;
 
         return $this;
     }
 
     /**
-     * Remove client
-     *
-     * @param \NO\GestionnaireBundle\Entity\Client $client
-     */
-    public function removeClient(\NO\GestionnaireBundle\Entity\Client $client)
-    {
-        $this->clients->removeElement($client);
-    }
-
-    /**
      * Get clients
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return \NO\GestionnaireBundle\Entity\Client
      */
     public function getClients()
     {
@@ -195,33 +197,23 @@ class Projet
     }
 
     /**
-     * Add pole
+     * Set poles
      *
-     * @param \NO\GestionnaireBundle\Entity\Pole $pole
+     * @param \NO\GestionnaireBundle\Entity\Pole $poles
      *
      * @return Projet
      */
-    public function addPole(\NO\GestionnaireBundle\Entity\Pole $pole)
+    public function setPoles(\NO\GestionnaireBundle\Entity\Pole $poles = null)
     {
-        $this->poles[] = $pole;
+        $this->poles = $poles;
 
         return $this;
     }
 
     /**
-     * Remove pole
-     *
-     * @param \NO\GestionnaireBundle\Entity\Pole $pole
-     */
-    public function removePole(\NO\GestionnaireBundle\Entity\Pole $pole)
-    {
-        $this->poles->removeElement($pole);
-    }
-
-    /**
      * Get poles
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return \NO\GestionnaireBundle\Entity\Pole
      */
     public function getPoles()
     {
@@ -229,33 +221,23 @@ class Projet
     }
 
     /**
-     * Add typology
+     * Set typologies
      *
-     * @param \NO\GestionnaireBundle\Entity\Typologie $typology
+     * @param \NO\GestionnaireBundle\Entity\Typologie $typologies
      *
      * @return Projet
      */
-    public function addTypology(\NO\GestionnaireBundle\Entity\Typologie $typology)
+    public function setTypologies(\NO\GestionnaireBundle\Entity\Typologie $typologies = null)
     {
-        $this->typologies[] = $typology;
+        $this->typologies = $typologies;
 
         return $this;
     }
 
     /**
-     * Remove typology
-     *
-     * @param \NO\GestionnaireBundle\Entity\Typologie $typology
-     */
-    public function removeTypology(\NO\GestionnaireBundle\Entity\Typologie $typology)
-    {
-        $this->typologies->removeElement($typology);
-    }
-
-    /**
      * Get typologies
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return \NO\GestionnaireBundle\Entity\Typologie
      */
     public function getTypologies()
     {

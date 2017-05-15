@@ -37,6 +37,9 @@ class Tache
      */
     private $raf;
 
+    /**
+     * @var \NO\GestionnaireBundle\Entity\Projet
+     */
     private $projets;
 
 
@@ -169,42 +172,25 @@ class Tache
     {
         return $this->raf;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->projets = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
     /**
-     * Add projet
+     * Set projets
      *
-     * @param \NO\GestionnaireBundle\Entity\Projet $projet
+     * @param \NO\GestionnaireBundle\Entity\Projet $projets
      *
      * @return Tache
      */
-    public function addProjet(\NO\GestionnaireBundle\Entity\Projet $projet)
+    public function setProjets(\NO\GestionnaireBundle\Entity\Projet $projets = null)
     {
-        $this->projets[] = $projet;
+        $this->projets = $projets;
 
         return $this;
     }
 
     /**
-     * Remove projet
-     *
-     * @param \NO\GestionnaireBundle\Entity\Projet $projet
-     */
-    public function removeProjet(\NO\GestionnaireBundle\Entity\Projet $projet)
-    {
-        $this->projets->removeElement($projet);
-    }
-
-    /**
      * Get projets
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return \NO\GestionnaireBundle\Entity\Projet
      */
     public function getProjets()
     {

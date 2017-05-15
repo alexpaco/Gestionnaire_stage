@@ -2,6 +2,7 @@
 	
 namespace NO\GestionnaireBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 /**
  * User
  */
@@ -22,8 +23,14 @@ class User
      */
     private $password;
 
+    /**
+     * @var \NO\GestionnaireBundle\Entity\Pole
+     */
     private $poles;
-
+    
+    /**
+     * @var ArrayCollection
+    */
     private $roles;
 
     /**
@@ -88,42 +95,7 @@ class User
      */
     public function __construct()
     {
-        $this->poles = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->roles = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Add pole
-     *
-     * @param \NO\GestionnaireBundle\Entity\Pole $pole
-     *
-     * @return User
-     */
-    public function addPole(\NO\GestionnaireBundle\Entity\Pole $pole)
-    {
-        $this->poles[] = $pole;
-
-        return $this;
-    }
-
-    /**
-     * Remove pole
-     *
-     * @param \NO\GestionnaireBundle\Entity\Pole $pole
-     */
-    public function removePole(\NO\GestionnaireBundle\Entity\Pole $pole)
-    {
-        $this->poles->removeElement($pole);
-    }
-
-    /**
-     * Get poles
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getPoles()
-    {
-        return $this->poles;
+        $this->roles = new ArrayCollection();
     }
 
     /**
@@ -153,10 +125,35 @@ class User
     /**
      * Get roles
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return Collection
      */
     public function getRoles()
     {
         return $this->roles;
+    }
+
+
+    /**
+     * Set poles
+     *
+     * @param \NO\GestionnaireBundle\Entity\Pole $poles
+     *
+     * @return User
+     */
+    public function setPoles(\NO\GestionnaireBundle\Entity\Pole $poles = null)
+    {
+        $this->poles = $poles;
+
+        return $this;
+    }
+
+    /**
+     * Get poles
+     *
+     * @return \NO\GestionnaireBundle\Entity\Pole
+     */
+    public function getPoles()
+    {
+        return $this->poles;
     }
 }

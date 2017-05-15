@@ -31,39 +31,20 @@ NO\GestionnaireBundle\Entity\Projet:
         inverseJoinColumns:
           user_id:
             referencedColumnName: id
+  manyToOne:          
     clients:
       targetEntity: NO\GestionnaireBundle\Entity\Client
-      joinTable:
-        name: clientToProjet
-        joinColumns:
-          projet_id:
-            referencedColumnName: id
-            nullable: false
-            unique: true
-        inverseJoinColumns:
-          client_id:
-            referencedColumnName: id
-            nullable: false
+      joinColumn:
+        name: client_id
+        referencedColumnName: id
     poles:
       targetEntity: NO\GestionnaireBundle\Entity\Pole
-      joinTable:
-        name: poleToProjet
-        joinColumns:
-          projet_id:
-            referencedColumnName: id
-            unique: true
-        inverseJoinColumns:
-          pole_id:
-            referencedColumnName: id
+      joinColumn:
+        name: pole_id
+        referencedColumnName: id
     typologies:
       targetEntity: NO\GestionnaireBundle\Entity\Typologie
-      joinTable:
-        name: typologieToProjet
-        joinColumns:
-          typologie_id:
-            referencedColumnName: id
-        inverseJoinColumns:
-          projet_id:
-            referencedColumnName: id
-            unique: true
+      joinColumn:
+        name: typologie_id
+        referencedColumnName: id
           

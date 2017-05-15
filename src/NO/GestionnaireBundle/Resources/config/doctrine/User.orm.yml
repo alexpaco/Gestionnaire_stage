@@ -17,18 +17,13 @@ NO\GestionnaireBundle\Entity\User:
       length: 255
       nullable: true
       column: password
-  manyToMany:
+  manyToOne:
     poles:
       targetEntity: NO\GestionnaireBundle\Entity\Pole
-      joinTable:
-        name: poleToUser
-        joinColumns:
-          user_id:
-            referencedColumnName: id
-            unique: true
-        inverseJoinColumns:
-          pole_id:
-            referencedColumnName: id
+      joinColumn:
+        name: pole_id
+        referencedColumnName: id
+  manyToMany:          
     roles:
       targetEntity: NO\GestionnaireBundle\Entity\Role
       joinTable:
@@ -36,7 +31,6 @@ NO\GestionnaireBundle\Entity\User:
         joinColumns:
           user_id:
             referencedColumnName: id
-            unique: true
         inverseJoinColumns:
           role_id:
             referencedColumnName: id

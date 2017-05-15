@@ -30,16 +30,10 @@ NO\GestionnaireBundle\Entity\Tache:
       scale: 1
       nullable: true
       column: raf
-  manyToMany:
+  manyToOne:
     projets:
       targetEntity: NO\GestionnaireBundle\Entity\Projet
-      joinTable:
-        name: tacheToProjet
-        joinColumns:
-          tache_id:
-            referencedColumnName: id
-            unique: true
-        inverseJoinColumns:
-          projet_id:
-            referencedColumnName: id
+      joinColumn:
+        name: projet_id
+        referencedColumnName: id
           
