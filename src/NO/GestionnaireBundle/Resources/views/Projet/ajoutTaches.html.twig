@@ -18,6 +18,6 @@
 	</div>
 	<div class="col-sm-7">
 	{{ include('NOGestionnaireBundle:Projet:formAjoutTaches.html.twig') }}
-	<a href="{{ path('no_gestionnaire_homepage') }}" class="btn btn-default"><i class="glyphicon glyphicon-chevron-left"></i>Retour à l'accueil</a>
+	<a href="{{ path('no_gestionnaire_suivi', {'id': projet.id}) }}" class="btn btn-default"><i class="glyphicon glyphicon-chevron-left"></i> Retour au suivi du projet</a>
 	</div>
 {% endblock %}

@@ -19,25 +19,16 @@ class TacheType extends AbstractType
     {
         $builder->add('nomTache', TextType::class)
                 ->add('niveau', NumberType::class)
-                ->add('Ajouter', SubmitType::class)
                 ->add('ordre', NumberType::class, array(
                     'required' => false,
-                ))
-                ->add('joursRealises', NumberType::class, array(
-                    'scale' => 1,
-                    'required' => false,
-                ))
-                ->add('raf', NumberType::class, array(
-                    'scale' => 1,
-                    'required' => false,
-                ))
-                
+                ))                
                 ->add('tacheMeres', EntityType::class, array(
                     'class' => 'NOGestionnaireBundle:Tache',
                     'choice_label' => 'nomTache',
                     'placeholder' => 'Choisi une tâche mère',
                     'required' => false,
-                ));
+                ))
+                ->add('Ajouter', SubmitType::class);
     }
     
     /**
