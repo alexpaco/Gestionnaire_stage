@@ -1,9 +1,40 @@
 {%extends "NOGestionnaireBundle::layout.html.twig" %}
 {% block title %}
-	Suivi de projet - {{ parent() }}
+	{{ projets.nomProjet }} - suivi - {{ parent() }}
 {% endblock %}
 
 {% block body %}
-	<h3>Je suis la page de suivi</h3>
+	<h3>Suivi de projet</h3>
+	<table class="table table-bordered table-condensed">
+		<tr class="info">
+			<th style="width: 80%; text-align: center;">{{ projets.NomProjet }}</th>
+			<th style="width: 5%">Vendus</th>
+			<th style="width: 5%">Réalisés</th>
+			<th style="width: 5%">RAF</th>
+			<th style="width: 5%">Solde</th>
+		</tr>
+		{% for  tache in taches %}
+			{% if tache.tacheMeres == null and tache.projets.id == projets.id %}
+				<tr class="active text-primary">
+					<th><span>{{ tache.nomTache }}</span></th>
+					<th></th>
+					<th>{{ tache.joursRealises }}</th>
+					<th>{{ tache.raf }}</th>
+					<th></th>
+				</tr>
+			{% elseif tache.niveau == 2 and tache.projets.id == projets.id %}
+				<tr>
+					<th><span style="margin-left: 50px">{{ tache.nomTache }}</span></th>
+					<th></th>
+					<th>{{ tache.joursRealises }}</th>
+					<th>{{ tache.raf }}</th>
+					<th></th>
+				</tr>
+			{% endif %}
+		{% endfor %}
+			
+	</table>
+	
 	<a href="{{ path('no_gestionnaire_homepage') }}" class="btn btn-default"><i class="glyphicon glyphicon-chevron-left"></i>Retour à l'accueil</a>
+	<a href="{{ path('no_gestionnaire_ajout_taches', { 'id': projets.id }) }}" class="btn btn-default">Ajouter une tâche</a>
 {% endblock %}

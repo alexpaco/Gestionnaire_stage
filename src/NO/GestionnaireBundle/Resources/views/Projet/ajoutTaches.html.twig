@@ -12,7 +12,7 @@
 				{% if tache.tacheMeres == null and tache.projets.id == projet.id %}
 					<p style="color: red">{{ tache.nomTache }}</p>
 				{% elseif tache.niveau == 2 and tache.projets.id == projet.id %}
-					<p style="margin-left: 50px;">{{ tache.nomTache }}</p>
+					<p style="margin-left: 50px">{{ tache.nomTache|replace({',': ' /'}) }}</p>
 				{% endif %}
 			{% endfor %}
 	</div>

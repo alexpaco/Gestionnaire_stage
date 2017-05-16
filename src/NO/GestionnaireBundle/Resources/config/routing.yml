@@ -1,8 +1,8 @@
 no_gestionnaire_homepage:
-    path:     /test
+    path:     /
     defaults: { _controller: NOGestionnaireBundle:Default:index }
 no_gestionnaire_suivi:
-    path:     /suivi_projet
+    path:     /suivi_projet/{id}
     defaults: { _controller: NOGestionnaireBundle:Projet:suivi }
 no_gestionnaire_ajout:
     path:     /ajout_projet

@@ -3,7 +3,7 @@
 	<ul class="nav nav-pills nav-stacked">
 		{% for projet in projets %}
 			<li>
-				<a href="{{ path('no_gestionnaire_ajout_taches', {'id':projet.id}) }}">{{ projet.nomProjet }}</a>
+				<a href="{{ path('no_gestionnaire_suivi', {'id':projet.id}) }}">{{ projet.nomProjet }}</a>
 			</li>
 		{% endfor %}
 	</ul>		

@@ -20,9 +20,17 @@ use NO\GestionnaireBundle\Entity\Typologie;
 use NO\GestionnaireBundle\Entity\User;
 class ProjetController extends Controller
 {
-	public function suiviAction()
-	{
-		return $this->render('NOGestionnaireBundle:Projet:suivi.html.twig');
+	public function suiviAction($id, Request $request)
+	{	
+		$em = $this->getDoctrine()->getManager();
+
+		$projet = $em->getRepository('NOGestionnaireBundle:Projet')->find($id);
+		$tache = $em->getRepository('NOGestionnaireBundle:Tache')->findBy(array('projets' => $id), array());
+
+		return $this->render('NOGestionnaireBundle:Projet:suivi.html.twig', array(
+			'projets' => $projet,
+			'taches' => $tache,
+		));
 	}
 	public function ajoutAction(Request $request)
 	{
@@ -37,7 +45,7 @@ class ProjetController extends Controller
 			$em->persist($projet);
 			$em->flush();
 
-			return $this->redirectToRoute('no_gestionnaire_homepage');
+			return $this->redirectToRoute('no_gestionnaire_suvi', array('id' => $projet->getId()));
 		}
 
 		return $this->render('NOGestionnaireBundle:Projet:ajout.html.twig', array(
