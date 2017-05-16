@@ -1,10 +1,10 @@
 <div>
-	<h4>Poles existants</h4>
-	<ul class="nav nav-pills nav-stacked">	
-		{% for pole in poles %}
+	<h4>Projets en cours</h4>
+	<ul class="nav nav-pills nav-stacked">
+		{% for projet in projets %}
 			<li>
-				<a href="{{ path('no_gestionnaire_modification', {'id': pole.id }) }}">{{ pole.nomPole }}</a>
-			</li>	
+				<a href="{{ path('no_gestionnaire_ajout_taches', {'id':projet.id}) }}">{{ projet.nomProjet }}</a>
+			</li>
 		{% endfor %}
-	</ul>
-</div>	
+	</ul>		
+</div>

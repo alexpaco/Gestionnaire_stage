@@ -15,3 +15,6 @@ no_gestionnaire_modification:
 no_gestionnaire_admin:
     path:     /espace_admin
     defaults: { _controller: NOGestionnaireBundle:Projet:admin }
+no_gestionnaire_ajout_taches:
+    path:     /ajout_taches/{id}
+    defaults: { _controller: NOGestionnaireBundle:Projet:ajoutTaches }

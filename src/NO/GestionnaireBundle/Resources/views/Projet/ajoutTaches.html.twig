@@ -1,0 +1,23 @@
+{%extends "NOGestionnaireBundle::layout.html.twig" %}
+{% block title %}
+	Ajout de tache - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+	<div class="col-sm-5">
+		<h3>Liste des tâches</h3>
+
+		
+			{% for tache in taches %}
+				{% if tache.tacheMeres == null and tache.projets.id == projet.id %}
+					<p style="color: red">{{ tache.nomTache }}</p>
+				{% elseif tache.niveau == 2 and tache.projets.id == projet.id %}
+					<p style="margin-left: 50px;">{{ tache.nomTache }}</p>
+				{% endif %}
+			{% endfor %}
+	</div>
+	<div class="col-sm-7">
+	{{ include('NOGestionnaireBundle:Projet:formAjoutTaches.html.twig') }}
+	<a href="{{ path('no_gestionnaire_homepage') }}" class="btn btn-default"><i class="glyphicon glyphicon-chevron-left"></i>Retour à l'accueil</a>
+	</div>
+{% endblock %}

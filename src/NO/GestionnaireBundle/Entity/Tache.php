@@ -41,8 +41,12 @@ class Tache
      * @var \NO\GestionnaireBundle\Entity\Projet
      */
     private $projets;
-
-
+    
+    /**
+     * @var \NO\GestionnaireBundle\Entity\Tache
+     */
+    private $tacheMeres;
+    
     /**
      * Get id
      *
@@ -195,5 +199,30 @@ class Tache
     public function getProjets()
     {
         return $this->projets;
+    }
+
+
+    /**
+     * Set tacheMeres
+     *
+     * @param \NO\GestionnaireBundle\Entity\Tache $tacheMeres
+     *
+     * @return Tache
+     */
+    public function setTacheMeres(\NO\GestionnaireBundle\Entity\Tache $tacheMeres = null)
+    {
+        $this->tacheMeres = $tacheMeres;
+
+        return $this;
+    }
+
+    /**
+     * Get tacheMeres
+     *
+     * @return \NO\GestionnaireBundle\Entity\Tache
+     */
+    public function getTacheMeres()
+    {
+        return $this->tacheMeres;
     }
 }

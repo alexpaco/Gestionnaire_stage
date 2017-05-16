@@ -36,4 +36,9 @@ NO\GestionnaireBundle\Entity\Tache:
       joinColumn:
         name: projet_id
         referencedColumnName: id
+    tacheMeres:
+      targetEntity: NO\GestionnaireBundle\Entity\Tache
+      joinColumn:
+        name: tache_mere_id
+        referencedColumnName: id
           

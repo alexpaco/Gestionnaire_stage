@@ -40,19 +40,16 @@ class ProjetType extends AbstractType
                     'class' => 'NOGestionnaireBundle:Client',
                     'placeholder' => 'Choisi un client',
                     'choice_label' => 'nomClient',
-                    'multiple' => false,
                 ))
                 ->add('poles', EntityType::class, array(
                     'class' => 'NOGestionnaireBundle:Pole',
                     'placeholder' => 'Choisi un pole',
                     'choice_label' => 'nomPole',
-                    'multiple' => false,
                 ))
                 ->add('typologies', EntityType::class, array(
                     'class' => 'NOGestionnaireBundle:Typologie',
                     'placeholder' => 'Choisi une typologie',
                     'choice_label' => 'nomTypologie',
-                    'multiple' => false,
                 ))
                 ->add('Ajouter', SubmitType::class);
     }

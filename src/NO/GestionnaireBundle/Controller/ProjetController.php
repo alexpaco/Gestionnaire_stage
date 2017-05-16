@@ -5,16 +5,18 @@ namespace NO\GestionnaireBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use NO\GestionnaireBundle\Form\PoleEditType;
-use NO\GestionnaireBundle\Form\PoleType;
-use NO\GestionnaireBundle\Form\TypologieType;
 use NO\GestionnaireBundle\Form\ClientType;
+use NO\GestionnaireBundle\Form\PoleType;
+use NO\GestionnaireBundle\Form\PoleEditType;
 use NO\GestionnaireBundle\Form\ProjetType;
+use NO\GestionnaireBundle\Form\TacheType;
+use NO\GestionnaireBundle\Form\TypologieType;
 use NO\GestionnaireBundle\Form\UserType;
-use NO\GestionnaireBundle\Entity\Typologie;
+use NO\GestionnaireBundle\Entity\Client;
 use NO\GestionnaireBundle\Entity\Pole;
 use NO\GestionnaireBundle\Entity\Projet;
-use NO\GestionnaireBundle\Entity\Client;
+use NO\GestionnaireBundle\Entity\Tache;
+use NO\GestionnaireBundle\Entity\Typologie;
 use NO\GestionnaireBundle\Entity\User;
 class ProjetController extends Controller
 {
@@ -60,6 +62,32 @@ class ProjetController extends Controller
 		return $this->render('NOGestionnaireBundle:Projet:modif.html.twig', array(
 			'pole' => $pole,
 			'form' => $form->createView()
+		));
+	}
+
+	public function ajoutTachesAction(Request $request, $id)
+	{
+		$em = $this->getDoctrine()->getManager();
+
+		$tache = new Tache();
+
+		$projet = $em->getRepository('NOGestionnaireBundle:Projet')->find($id);
+		$id = $projet->getId();
+		$listeTaches = $em->getRepository('NOGestionnaireBundle:Tache')->findBy(array(), array());
+
+		$formTache = $this->get('form.factory')->create(TacheType::class, $tache);
+		$tache->setProjets($projet);
+		if($request->isMethod('POST') && $formTache->handleRequest($request)->isSubmitted())
+		{
+			$em->persist($tache);
+			$em->flush();
+
+			return $this->redirectToRoute('no_gestionnaire_ajout_taches', array('id' => $projet->getId()));
+		}
+		return $this->render('NOGestionnaireBundle:Projet:ajoutTaches.html.twig', array(
+			'formTache' => $formTache->createView(),
+			'taches' => $listeTaches,
+			'projet' => $projet,
 		));
 	}
 

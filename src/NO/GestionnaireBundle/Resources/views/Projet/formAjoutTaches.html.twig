@@ -1,0 +1,53 @@
+<h3>Ajout de tâches</h3>
+
+<div class="well">
+	{{ form_start(formTache, {'attr': {'class': 'form-horizontal'}}) }}
+	{{ form_errors(formTache) }}
+	<div class="form-group">
+		{{ form_label(formTache.nomTache, 'Nom de la tâche', {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+		{{ form_errors(formTache.nomTache) }}
+		<div class="col-sm-9">
+			{{ form_widget(formTache.nomTache) }}
+		</div>
+	</div>
+	<div class="form-group">
+		{{ form_label(formTache.niveau, 'Niveau de la tâche', {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+		{{ form_errors(formTache.niveau) }}
+		<div class="col-sm-9">
+			{{ form_widget(formTache.niveau) }}
+		</div>
+	</div>
+	
+	<div class="form-group">
+		{{ form_label(formTache.ordre, 'Ordre', {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+		{{ form_errors(formTache.ordre) }}
+		<div class="col-sm-9">
+			{{ form_widget(formTache.ordre) }}
+		</div>
+	</div>
+	<div class="form-group">
+		{{ form_label(formTache.joursRealises, 'Jours Réalisés', {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+		{{ form_errors(formTache.joursRealises) }}
+		<div class="col-sm-9">
+			{{ form_widget(formTache.joursRealises) }}
+		</div>
+	</div>
+	<div class="form-group">
+		{{ form_label(formTache.raf, 'Reste à faire', {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+		{{ form_errors(formTache.raf) }}
+		<div class="col-sm-9">
+			{{ form_widget(formTache.raf) }}
+		</div>
+	</div>
+	<div class="form-group">
+		{{ form_label(formTache.tacheMeres, 'Tâche mère', {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+		{{ form_errors(formTache.tacheMeres) }}
+		<div class="col-sm-9">
+			{{ form_widget(formTache.tacheMeres) }}
+		</div>
+	</div>
+	{{ form_widget(formTache.Ajouter, {'attr': {'class': 'btn btn-primary'}}) }}
+
+	{{ form_rest(formTache) }}
+	{{ form_end(formTache) }}
+</div>
