@@ -1,0 +1,92 @@
+<h3>Espace administrateur</h3>
+<div class="well">
+	{{ form_start(formPole, {'attr': {'class': 'form-horizontal'}}) }}
+	{{form_errors(formPole) }}
+	<div class="form-group">
+		{{ form_label(formPole.nomPole, 'Nouveau pole', {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+		{{ form_errors(formPole.nomPole) }}
+		<div class="col-sm-9">
+			{{ form_widget(formPole.nomPole) }}
+		</div>
+		{{ form_widget(formPole.Ajouter, {'attr': {'class': 'btn btn-primary'}}) }}
+	</div>
+	{{ form_rest(formPole) }}
+	{{ form_end(formPole) }}
+</div>
+<div class="well">
+	{{ form_start(formTypologie, {'attr': {'class': 'form-horizontal'}}) }}
+	{{form_errors(formTypologie) }}
+	<div class="form-group">
+		{{ form_label(formTypologie.nomTypologie, 'Nouvelle typologie', {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+		{{ form_errors(formTypologie.nomTypologie) }}
+		<div class="col-sm-9">
+			{{ form_widget(formTypologie.nomTypologie) }}
+		</div>
+		{{ form_widget(formTypologie.Ajouter, {'attr': {'class': 'btn btn-primary'}}) }}
+	</div>
+	{{ form_rest(formTypologie) }}
+	{{ form_end(formTypologie) }}
+</div>
+<div class="well">
+	{{ form_start(formClient, {'attr': {'class': 'form-horizontal'}}) }}
+	{{form_errors(formClient) }}
+	<div class="form-group">
+		{{ form_label(formClient.nomClient, 'Nouveau client', {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+		{{ form_errors(formClient.nomClient) }}
+		<div class="col-sm-9">
+			{{ form_widget(formClient.nomClient) }}
+		</div>
+		{{ form_widget(formClient.Ajouter, {'attr': {'class': 'btn btn-primary'}}) }}
+	</div>
+	{{ form_rest(formClient) }}
+	{{ form_end(formClient) }}
+</div>
+<div class="well">
+	{{ form_start(formProfil, {'attr': {'class': 'form-horizontal'}}) }}
+	{{form_errors(formProfil) }}
+	<div class="form-group">
+		{{ form_label(formProfil.nomProfil, 'Nouveau Profil', {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+		{{ form_errors(formProfil.nomProfil) }}
+		<div class="col-sm-9">
+			{{ form_widget(formProfil.nomProfil) }}
+		</div>
+		{{ form_widget(formProfil.Ajouter, {'attr': {'class': 'btn btn-primary'}}) }}
+	</div>
+	{{ form_rest(formProfil) }}
+	{{ form_end(formProfil) }}
+</div>
+<div class="well">
+	{{ form_start(formUser, {'attr': {'class': 'form-horizontal'}}) }}
+	{{form_errors(formUser) }}
+	<div class="form-group">
+		{{ form_label(formUser.nomUser, 'Nouvel utilisateur', {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+		{{ form_errors(formUser.nomUser) }}
+		<div class="col-sm-9">
+			{{ form_widget(formUser.nomUser) }}
+		</div>
+	</div>	
+	<div class="form-group">
+		{{ form_label(formUser.password, 'Mot de passe', {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+		{{ form_errors(formUser.password) }}
+		<div class="col-sm-9">
+			{{ form_widget(formUser.password) }}
+		</div>
+	</div>	
+	<div class="form-group">
+		{{ form_label(formUser.poles, 'Pole', {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+		{{ form_errors(formUser.poles) }}
+		<div class="col-sm-9">
+			{{ form_widget(formUser.poles) }}
+		</div>
+	</div>
+	<div class="form-group">
+		{{ form_label(formUser.roles, 'Role', {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+		{{ form_errors(formUser.roles) }}
+		<div class="col-sm-9">
+			{{ form_widget(formUser.roles, {'attr': {'class': 'form-control'}}) }}
+		</div>
+	{{ form_widget(formUser.Ajouter, {'attr': {'class': 'btn btn-primary'}}) }}
+	</div>
+	{{ form_rest(formUser) }}
+	{{ form_end(formUser) }}
+</div>
