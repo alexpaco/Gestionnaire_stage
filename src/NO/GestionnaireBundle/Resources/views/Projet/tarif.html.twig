@@ -1,0 +1,10 @@
+{%extends "NOGestionnaireBundle::layout.html.twig" %}
+{% block title %}
+	Ajoutde profil avec tarif - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+	{{ form(formTarif) }}
+	<a href="{{ path('no_gestionnaire_suivi', {'id': projet.id}) }}" class="btn btn-default"><i class="glyphicon glyphicon-chevron-left"></i> Retour au suivi du projet</a>
+	</div>
+{% endblock %}

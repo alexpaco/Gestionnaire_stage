@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use NO\GestionnaireBundle\Form\ClientType;
+use NO\GestionnaireBundle\Form\GrilleTarifType;
 use NO\GestionnaireBundle\Form\PoleType;
 use NO\GestionnaireBundle\Form\PoleEditType;
 use NO\GestionnaireBundle\Form\ProfilType;
@@ -14,6 +15,7 @@ use NO\GestionnaireBundle\Form\TacheType;
 use NO\GestionnaireBundle\Form\TypologieType;
 use NO\GestionnaireBundle\Form\UserType;
 use NO\GestionnaireBundle\Entity\Client;
+use NO\GestionnaireBundle\Entity\GrilleTarif;
 use NO\GestionnaireBundle\Entity\Pole;
 use NO\GestionnaireBundle\Entity\Profil;
 use NO\GestionnaireBundle\Entity\Projet;
@@ -175,5 +177,29 @@ class ProjetController extends Controller
         	'poles' => $poles,
         	'projets' => $projets,
         ));
-	}	
+	}
+
+	public function tarifAction($id, Request $request)
+	{
+		$em = $this->getDoctrine()->getManager();
+
+		$tarif = new GrilleTarif();
+
+		$projet = $em->getRepository('NOGestionnaireBundle:Projet')->find($id);
+
+		$formTarif = $this->get('form.factory')->create(GrilleTarifType::class, $tarif);
+		$tarif->setProjet($projet);
+		if($request->isMethod('POST') && $formTarif->handleRequest($request)->isSubmitted())
+    	{
+    		$em->persist($tarif);
+    		$em->flush();
+
+    		return $this->redirectToRoute('no_gestionnaire_tarif', array('id' => $projet->getId()));
+    	}
+
+    	return $this->render('NOGestionnaireBundle:Projet:tarif.html.twig', array(
+    		'formTarif' => $formTarif->createView(),
+    		'projet' => $projet,
+    	));
+	}
 }

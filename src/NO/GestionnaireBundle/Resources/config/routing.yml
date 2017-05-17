@@ -18,3 +18,6 @@ no_gestionnaire_admin:
 no_gestionnaire_ajout_taches:
     path:     /ajout_taches/{id}
     defaults: { _controller: NOGestionnaireBundle:Projet:ajoutTaches }
+no_gestionnaire_tarif:
+    path:     /tarif/{id}
+    defaults: { _controller: NOGestionnaireBundle:Projet:tarif }
