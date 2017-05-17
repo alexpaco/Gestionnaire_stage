@@ -16,19 +16,19 @@
 		{% for tache in taches %}
 			{% if tache.niveau == 1 and tache.projets.id == projets.id %}
 				<tr class="active text-primary">
-					<th>{{ tache.nomTache }}</th>
-					<th></th>
-					<th>{{ tache.joursRealises }}</th>
-					<th>{{ tache.raf }}</th>
-					<th></th>
+					<td>{{ tache.nomTache }}</td>
+					<td></td>
+					<td>{{ tache.joursRealises }}</td>
+					<td>{{ tache.raf }}</td>
+					<td></td>
 				</tr>
 			{% elseif tache.niveau == 2 and tache.projets.id == projets.id %}
 				<tr>
-					<th>{{ tache.nomTache }}</th>
-					<th></th>
-					<th>{{ tache.joursRealises }}</th>
-					<th>{{ tache.raf }}</th>
-					<th></th>
+					<td>{{ tache.nomTache }}</td>
+					<td></td>
+					<td>{{ tache.joursRealises }}</td>
+					<td>{{ tache.raf }}</td>
+					<td></td>
 				</tr>
 			{% endif %}	
 	{% endfor %}		

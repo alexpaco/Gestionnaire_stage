@@ -215,6 +215,9 @@ class ProjetController extends Controller
 		$joursVendus = new NbJourVendus();
 
 		$projet = $em->getRepository('NOGestionnaireBundle:Projet')->find($id);
+		$profilsProjet = $em->getRepository('NOGestionnaireBundle:GrilleTarif')->findBy(array('projet' => $id), array());
+		$listeTaches = $em->getRepository('NOGestionnaireBundle:Tache')->findBy(array('projets' => $id), array('ordre' => 'asc'));
+
 
 		$formJoursVendus = $this->get('form.factory')->create(NbJourVendusType::class, $joursVendus);
 
@@ -229,6 +232,8 @@ class ProjetController extends Controller
 		return $this->render('NOGestionnaireBundle:Projet:joursVendus.html.twig', array(
     		'formJoursVendus' => $formJoursVendus->createView(),
     		'projet' => $projet,
+    		'profilsProjets' => $profilsProjet,
+    		'taches' => $listeTaches,
     	));
 	}
 }

@@ -5,5 +5,23 @@
 
 {% block body %}
 	{{form(formJoursVendus)}}
+	<table class="table table-bordered table-condensed table-striped">
+		<tr class="info">
+			<th style="width: 80%;">Liste des tâches</th>
+			{% for profil in profilsProjets %}
+				<th style="width: 5%;">{{ profil.profil.nomProfil }}</th>
+			{% endfor %}
+		</tr>
+		{% for tache in taches %}
+			{% if tache.niveau >= 2 %}
+				<tr>
+					<td>{{ tache.nomTache }}</td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+			{% endif %}
+		{% endfor %}
+	</table>
 	<a href="{{ path('no_gestionnaire_suivi', {'id': projet.id}) }}" class="btn btn-default"><i class="glyphicon glyphicon-chevron-left"></i> Retour au suivi du projet</a>
 {% endblock %}
