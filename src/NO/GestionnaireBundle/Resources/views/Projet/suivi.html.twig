@@ -14,9 +14,9 @@
 			<th style="width: 5%">Solde</th>
 		</tr>
 		{% for tache in taches %}
-			{% if tache.tacheMeres == null and tache.projets.id == projets.id %}
+			{% if tache.niveau == 1 and tache.projets.id == projets.id %}
 				<tr class="active text-primary">
-					<th><span>{{ tache.nomTache }}</span></th>
+					<th>{{ tache.nomTache }}</th>
 					<th></th>
 					<th>{{ tache.joursRealises }}</th>
 					<th>{{ tache.raf }}</th>
@@ -24,7 +24,7 @@
 				</tr>
 			{% elseif tache.niveau == 2 and tache.projets.id == projets.id %}
 				<tr>
-					<th><span style="margin-left: 50px">{{ tache.nomTache }}</span></th>
+					<th>{{ tache.nomTache }}</th>
 					<th></th>
 					<th>{{ tache.joursRealises }}</th>
 					<th>{{ tache.raf }}</th>

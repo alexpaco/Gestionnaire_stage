@@ -27,7 +27,7 @@ class ProjetController extends Controller
 		$em = $this->getDoctrine()->getManager();
 
 		$projet = $em->getRepository('NOGestionnaireBundle:Projet')->find($id);
-		$tache = $em->getRepository('NOGestionnaireBundle:Tache')->findBy(array('projets' => $id), array());
+		$tache = $em->getRepository('NOGestionnaireBundle:Tache')->findBy(array('projets' => $id), array('ordre' => 'asc'));
 
 		return $this->render('NOGestionnaireBundle:Projet:suivi.html.twig', array(
 			'projets' => $projet,
@@ -83,7 +83,7 @@ class ProjetController extends Controller
 
 		$projet = $em->getRepository('NOGestionnaireBundle:Projet')->find($id);
 		$id = $projet->getId();
-		$listeTaches = $em->getRepository('NOGestionnaireBundle:Tache')->findBy(array(), array());
+		$listeTaches = $em->getRepository('NOGestionnaireBundle:Tache')->findBy(array(), array('ordre' => 'asc'));
 
 		$formTache = $this->get('form.factory')->create(TacheType::class, $tache);
 		$tache->setProjets($projet);
