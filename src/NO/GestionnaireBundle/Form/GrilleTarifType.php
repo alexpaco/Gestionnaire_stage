@@ -20,6 +20,7 @@ class GrilleTarifType extends AbstractType
                 ->add('profil', EntityType::class, array(
                     'class' => 'NOGestionnaireBundle:Profil',
                     'choice_label' => 'nomProfil',
+                    'placeholder' => 'Choisi un profil pour le projet',
                     ))
                 ->add('Ajouter', SubmitType::class);
     }
