@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use NO\GestionnaireBundle\Form\ClientType;
 use NO\GestionnaireBundle\Form\GrilleTarifType;
+use NO\GestionnaireBundle\Form\NbJourVendusType;
 use NO\GestionnaireBundle\Form\PoleType;
 use NO\GestionnaireBundle\Form\PoleEditType;
 use NO\GestionnaireBundle\Form\ProfilType;
@@ -16,6 +17,7 @@ use NO\GestionnaireBundle\Form\TypologieType;
 use NO\GestionnaireBundle\Form\UserType;
 use NO\GestionnaireBundle\Entity\Client;
 use NO\GestionnaireBundle\Entity\GrilleTarif;
+use NO\GestionnaireBundle\Entity\NbJourVendus;
 use NO\GestionnaireBundle\Entity\Pole;
 use NO\GestionnaireBundle\Entity\Profil;
 use NO\GestionnaireBundle\Entity\Projet;
@@ -186,6 +188,8 @@ class ProjetController extends Controller
 		$tarif = new GrilleTarif();
 
 		$projet = $em->getRepository('NOGestionnaireBundle:Projet')->find($id);
+		$listeTarif = $em->getRepository('NOGestionnaireBundle:GrilleTarif')->findBy(array('projet' => $id), array());
+
 
 		$formTarif = $this->get('form.factory')->create(GrilleTarifType::class, $tarif);
 		$tarif->setProjet($projet);
@@ -199,6 +203,31 @@ class ProjetController extends Controller
 
     	return $this->render('NOGestionnaireBundle:Projet:tarif.html.twig', array(
     		'formTarif' => $formTarif->createView(),
+    		'projet' => $projet,
+    		'tarifs' => $listeTarif,
+    	));
+	}
+
+	public function joursVendusAction($id, Request $request)
+	{
+		$em = $this->getDoctrine()->getManager();
+
+		$joursVendus = new NbJourVendus();
+
+		$projet = $em->getRepository('NOGestionnaireBundle:Projet')->find($id);
+
+		$formJoursVendus = $this->get('form.factory')->create(NbJourVendusType::class, $joursVendus);
+
+		if($request->isMethod('POST') && $formJoursVendus->handleRequest($request)->isSubmitted())
+		{
+			$em->persist($joursVendus);
+			$em->flush();
+
+			return $this->redirectToRoute('no_gestionnaire_jours_vendus', array('id' => $projet->getId()));
+		}
+
+		return $this->render('NOGestionnaireBundle:Projet:joursVendus.html.twig', array(
+    		'formJoursVendus' => $formJoursVendus->createView(),
     		'projet' => $projet,
     	));
 	}
