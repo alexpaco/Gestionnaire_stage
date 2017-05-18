@@ -14,7 +14,7 @@
 			<th style="width: 5%">Solde</th>
 		</tr>
 		{% for tache in taches %}
-			{% if tache.niveau == 1 and tache.projets.id == projets.id %}
+			{% if tache.tacheMeres == null and tache.projets.id == projets.id %}
 				<tr class="active text-primary">
 					<td>{{ tache.nomTache }}</td>
 					<td></td>
