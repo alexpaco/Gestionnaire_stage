@@ -10,4 +10,19 @@ namespace NO\GestionnaireBundle\Repository;
  */
 class TacheRepository extends \Doctrine\ORM\EntityRepository
 {
+	public function afficheTachesMeres($pattern)
+	{
+		return $this
+			->createQueryBuilder('t')
+			->where('t.niveau = :pattern')
+			->setParameter('pattern', $pattern);
+	}
+
+	public function afficheTachesEnfant($enfant)
+	{
+		return $this
+			->createQueryBuilder('te')
+			->where('te.tacheMeres != :enfant')
+			->setParameter('enfant', $enfant);
+	}
 }
