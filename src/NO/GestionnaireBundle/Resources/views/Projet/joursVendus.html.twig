@@ -4,7 +4,10 @@
 {% endblock %}
 
 {% block body %}
-	{{ form_start(formJoursVendus) }}
+<div class="col-sm-3">
+	{{ form(formJoursVendus) }}
+</div>
+	<div class="col-sm-9">
 	<table class="table table-bordered table-condensed table-striped">
 		<tr class="info">
 			<th style="width: 80%;">Liste des tâches</th>
@@ -16,15 +19,13 @@
 			{% if tache.niveau >= 2 %}
 				<tr>
 					<td>{{ tache.nomTache }}</td>
-					<td>{{form_widget(formJoursVendus.joursVendus)}}</td>
-					<td></td>
-					<td></td>
+				{% for jour in tache.joursVendus|sort %}
+					<td>{{ jour.joursVendus|number_format(0, '.') }}</td>
+				{% endfor %}
 				</tr>
 			{% endif %}
 		{% endfor %}
 	</table>
-	{{ form_widget(formJoursVendus.Ajouter) }}
-	{{ form_rest(formJoursVendus) }}
-	{{ form_end(formJoursVendus) }}
+	</div>
 	<a href="{{ path('no_gestionnaire_suivi', {'id': projet.id}) }}" class="btn btn-default"><i class="glyphicon glyphicon-chevron-left"></i> Retour au suivi du projet</a>
 {% endblock %}

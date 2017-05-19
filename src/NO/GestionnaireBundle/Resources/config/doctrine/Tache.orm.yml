@@ -42,4 +42,8 @@ NO\GestionnaireBundle\Entity\Tache:
       joinColumn:
         name: tache_mere_id
         referencedColumnName: id
+  oneToMany:
+    joursVendus:
+      targetEntity: NO\GestionnaireBundle\Entity\NbJourVendus
+      mappedBy: tache
           

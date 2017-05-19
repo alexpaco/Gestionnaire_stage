@@ -225,4 +225,50 @@ class Tache
     {
         return $this->tacheMeres;
     }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $joursVendus;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->joursVendus = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add joursVendus
+     *
+     * @param \NO\GestionnaireBundle\Entity\NbJourVendus $joursVendus
+     *
+     * @return Tache
+     */
+    public function addJoursVendus(\NO\GestionnaireBundle\Entity\NbJourVendus $joursVendus)
+    {
+        $this->joursVendus[] = $joursVendus;
+
+        return $this;
+    }
+
+    /**
+     * Remove joursVendus
+     *
+     * @param \NO\GestionnaireBundle\Entity\NbJourVendus $joursVendus
+     */
+    public function removeJoursVendus(\NO\GestionnaireBundle\Entity\NbJourVendus $joursVendus)
+    {
+        $this->joursVendus->removeElement($joursVendus);
+    }
+
+    /**
+     * Get joursVendus
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getJoursVendus()
+    {
+        return $this->joursVendus;
+    }
 }
