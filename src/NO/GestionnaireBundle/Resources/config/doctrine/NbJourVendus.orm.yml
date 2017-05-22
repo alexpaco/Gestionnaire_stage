@@ -15,7 +15,7 @@ NO\GestionnaireBundle\Entity\NbJourVendus:
   manyToOne:
     tache:
       targetEntity: NO\GestionnaireBundle\Entity\Tache
-      inversegBy: joursVendus
+      inversedBy: joursVendus
       joinColumns:
         tache_id:
           referencedColumnName: id
