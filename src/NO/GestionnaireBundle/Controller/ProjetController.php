@@ -208,32 +208,108 @@ class ProjetController extends Controller
     	));
 	}
 
-	public function joursVendusAction($id, Request $request)
+	public function joursVendusAction($idProjet, Request $request)
+	{
+		$em = $this->getDoctrine()->getManager();
+
+		$projet = $em->getRepository('NOGestionnaireBundle:Projet')->find($idProjet);
+		$profilsProjet = $em->getRepository('NOGestionnaireBundle:GrilleTarif')->findBy(array('projet' => $idProjet), array());
+		$listeTaches = $em->getRepository('NOGestionnaireBundle:Tache')->findBy(array('projets' => $idProjet), array('ordre' => 'asc'));
+
+		return $this->render('NOGestionnaireBundle:Projet:joursVendus.html.twig', array(
+    		'projet' => $projet,
+    		'profilsProjets' => $profilsProjet,
+    		'taches' => $listeTaches,
+    	));
+	}
+
+	public function joursVendusEditAction($idProjet, $joursVendusId, Request $request)
+	{
+		$em = $this->getDoctrine()->getManager();
+
+		$joursVendus = $em->getRepository('NOGestionnaireBundle:NbJourVendus')->findOneBy(array('id' => $joursVendusId));
+
+		$formJoursVendus = $this->createEditFormNbJoursVendusTypeAction($joursVendus, $idProjet);
+
+		if($request->isMethod('POST') && $formJoursVendus->handleRequest($request)->isSubmitted())	
+		{
+			$em->flush();
+		}
+		return $this->redirectToRoute('no_gestionnaire_jours_vendus', array('idProjet' => $idProjet));
+	}
+
+	public function joursVendusCreateAction($idProjet, Request $request)
 	{
 		$em = $this->getDoctrine()->getManager();
 
 		$joursVendus = new NbJourVendus();
 
-		$projet = $em->getRepository('NOGestionnaireBundle:Projet')->find($id);
-		$profilsProjet = $em->getRepository('NOGestionnaireBundle:GrilleTarif')->findBy(array('projet' => $id), array());
-		$listeTaches = $em->getRepository('NOGestionnaireBundle:Tache')->findBy(array('projets' => $id), array('ordre' => 'asc'));
-
-
-		$formJoursVendus = $this->get('form.factory')->create(NbJourVendusType::class, $joursVendus);
+		$formJoursVendus = $this->createCreateFormNbJoursVendusTypeAction($joursVendus, $idProjet);
 
 		if($request->isMethod('POST') && $formJoursVendus->handleRequest($request)->isSubmitted())
 		{
 			$em->persist($joursVendus);
 			$em->flush();
 
-			return $this->redirectToRoute('no_gestionnaire_jours_vendus', array('id' => $projet->getId()));
 		}
 
-		return $this->render('NOGestionnaireBundle:Projet:joursVendus.html.twig', array(
-    		'formJoursVendus' => $formJoursVendus->createView(),
-    		'projet' => $projet,
-    		'profilsProjets' => $profilsProjet,
-    		'taches' => $listeTaches,
-    	));
+		return $this->redirectToRoute('no_gestionnaire_jours_vendus', array('idProjet' => $idProjet));
 	}
+
+	public function createCreateFormNbJoursVendusTypeAction($joursVendus, $idProjet)
+	{
+		return $this->get('form.factory')
+					->createNamedBuilder('no_gestionnairebundle_nbjourvendus_create',
+						NbJourVendusType::class,
+						$joursVendus
+					 )
+					->setAction($this->generateUrl('no_gestionnaire_jours_vendus_create', array('idProjet' => $idProjet)))
+					->getForm();
+	}
+
+	public function createEditFormNbJoursVendusTypeAction($joursVendus, $idProjet)
+		{
+			return $this->get('form.factory')
+						->createNamedBuilder('no_gestionnairebundle_nbjourvendus_edit',
+							NbJourVendusType::class,
+							$joursVendus
+						)
+						->setAction($this->generateUrl('no_gestionnaire_jours_vendus_edit', array('idProjet' => $idProjet, 'joursVendusId' => $joursVendus->getId() )))
+						->getForm();
+		}
+
+	public function createFormAction($tacheId, $profilId, $idProjet)
+	{
+
+		$nbJoursVendus = 0;
+
+		$em = $this->getDoctrine()->getManager();
+		
+		$joursVendus = $em->getRepository('NOGestionnaireBundle:NbJourVendus')
+							->findOneBy(array('tache' => $tacheId, 'profil' => $profilId))
+							;
+
+		if ($joursVendus) {
+
+			$nbJoursVendus = $joursVendus->getJoursVendus();
+			$form = $this->createEditFormNbJoursVendusTypeAction($joursVendus, $idProjet);
+		}
+		else{
+			$tache = $em->getRepository('NOGestionnaireBundle:Tache')->findOneBy(array('id' => $tacheId));
+			$profil = $em->getRepository('NOGestionnaireBundle:Profil')->findOneBy(array('id' => $profilId));
+			$joursVendus = new NbJourVendus();
+			$joursVendus->setTache($tache);
+			$joursVendus->setProfil($profil);
+			$form = $this->createCreateFormNbJoursVendusTypeAction($joursVendus, $idProjet);
+		}
+		
+
+		return $this->render('NOGestionnaireBundle:Projet:formJoursVendus.html.twig', array(
+			'formJoursVendus' => $form->createView(),
+			'tacheId' => $tacheId,
+			'profilId' => $profilId,
+			'nbJoursVendus' => $nbJoursVendus,
+		));
+	}
+		
 }

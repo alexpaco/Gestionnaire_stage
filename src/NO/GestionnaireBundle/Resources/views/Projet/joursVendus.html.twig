@@ -5,7 +5,7 @@
 
 {% block body %}
 <div class="col-sm-3">
-	{{ form(formJoursVendus) }}
+	
 </div>
 	<div class="col-sm-9">
 	<table class="table table-bordered table-condensed table-striped">
@@ -19,8 +19,13 @@
 			{% if tache.niveau >= 2 %}
 				<tr>
 					<td>{{ tache.nomTache }}</td>
-				{% for jour in tache.joursVendus|sort %}
-					<td>{{ jour.joursVendus|number_format(0, '.') }}</td>
+				{# {% for jour in tache.joursVendus %} #}
+					{# <td>{{ jour.joursVendus|number_format(0, '.') }}</td> #}
+				{# {% endfor %} #}
+				{% for profil in profilsProjets %}
+					{# <td><input type="text" placeholder="pourquoi?"></td> #}
+					<td>{{ render(controller('NOGestionnaireBundle:Projet:createForm', { 'tacheId': tache.id , 'profilId': profil.profil.id, 'idProjet': projet.id})) }}</td>
+					{# <td>{{ render(url('no_gestionnaire_jours_vendus_add', { 'tacheId': tache.id , 'profilId': profil.profil.id, 'idProjet': projet.id})) }}</td> #}
 				{% endfor %}
 				</tr>
 			{% endif %}

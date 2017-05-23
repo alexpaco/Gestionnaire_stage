@@ -271,4 +271,14 @@ class Tache
     {
         return $this->joursVendus;
     }
+
+    public function nbJoursVendus()
+    {
+        $somme = 0;
+
+        foreach ($this->getJoursVendus() as $jourVendus) {
+            $somme += $jourVendus->getJoursVendus();
+        }
+        return $somme;
+    }
 }

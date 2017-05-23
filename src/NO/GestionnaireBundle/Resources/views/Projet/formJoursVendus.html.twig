@@ -1,0 +1,6 @@
+{{ form_start(formJoursVendus) }}
+	{{ form_widget(formJoursVendus.joursVendus, {'attr': {'value': nbJoursVendus}}) }}
+	{{ form_widget(formJoursVendus.tache, {'attr': {'value': tacheId, 'style': 'display: none' }}) }}
+	{{ form_widget(formJoursVendus.profil, {'attr': {'value': profilId, 'style': 'display: none' }}) }}
+	{{ form_widget(formJoursVendus.modifier) }}
+{{ form_end(formJoursVendus) }}

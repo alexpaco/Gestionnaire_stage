@@ -33,7 +33,7 @@ class NbJourVendusType extends AbstractType
                     'choice_label' => 'nomProfil',
                     'placeholder' => 'Choisi un profil',
                 ))
-                ->add('Ajouter', SubmitType::class);
+                ->add('modifier', SubmitType::class);
     }
     
     /**
