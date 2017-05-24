@@ -9,9 +9,9 @@
 
 		
 			{% for tache in taches %}
-				{% if tache.tacheMeres == null and tache.projets.id == projet.id %}
+				{% if tache.tacheMeres == null and tache.projet.id == projet.id %}
 					<p style="color: red">{{ tache.nomTache }}</p>
-				{% elseif tache.niveau == 2 and tache.projets.id == projet.id %}
+				{% elseif tache.niveau == 2 and tache.projet.id == projet.id %}
 					<p style="margin-left: 50px">{{ tache.nomTache }}</p>
 				{% endif %}
 			{% endfor %}

@@ -13,7 +13,7 @@
 			<th style="width: 5%">RAF</th>
 			<th style="width: 5%">Solde</th>
 		</tr>
-		{{dump(sommes)}}
+		{# {{dump(sommes)}} #}
 	{% for somme in sommes %}	
 			<tr class="{{ somme[0].tacheMeres == null ? 'active text-primary' : '' }}">
 				<td>{{ somme[0].nomTache }}</td>
@@ -22,7 +22,7 @@
 				</td>
 				<td>{{ somme[0].joursRealises }}</td>
 				<td>{{ somme[0].raf }}</td>
-				<td></td>
+				<td>{{ somme[0].realises is not defined ? '' : somme.somme - (somme[0].raf + somme[0].joursRealises) }}</td>
 			</tr>		
 	{% endfor %}		
 	</table>	

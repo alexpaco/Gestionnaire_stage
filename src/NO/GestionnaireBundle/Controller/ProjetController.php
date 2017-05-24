@@ -100,7 +100,7 @@ class ProjetController extends Controller
 		$listeTaches = $em->getRepository('NOGestionnaireBundle:Tache')->findBy(array(), array('ordre' => 'asc'));
 
 		$formTache = $this->get('form.factory')->create(TacheType::class, $tache);
-		$tache->setProjets($projet);
+		$tache->setProjet($projet);
 		if($request->isMethod('POST') && $formTache->handleRequest($request)->isSubmitted())
 		{
 			$em->persist($tache);
