@@ -10,4 +10,20 @@ namespace NO\GestionnaireBundle\Repository;
  */
 class NbJourVendusRepository extends \Doctrine\ORM\EntityRepository
 {
+	public function sommeJoursVendus($idProjet)
+	{
+		$somme = $this->_em->createQueryBuilder()
+								->select('ta')
+								->from('NOGestionnaireBundle:Tache', 'ta')
+								->leftJoin('ta.joursVendus', 'nb')
+								->addSelect('sum(nb.joursVendus) as somme')
+								->where('ta.projet = :idProjet')
+								->groupBy('ta.id')
+								->orderBy('ta.ordre')
+								->addOrderBy('ta.tacheMeres')
+								->addOrderBy('somme', 'DESC')
+								->setParameter('idProjet', $idProjet)
+								->getQuery();
+		return $somme->getResult();
+	}
 }

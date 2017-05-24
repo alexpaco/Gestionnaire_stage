@@ -24,6 +24,7 @@ use NO\GestionnaireBundle\Entity\Projet;
 use NO\GestionnaireBundle\Entity\Tache;
 use NO\GestionnaireBundle\Entity\Typologie;
 use NO\GestionnaireBundle\Entity\User;
+
 class ProjetController extends Controller
 {
 	public function suiviAction($id, Request $request)
@@ -31,12 +32,21 @@ class ProjetController extends Controller
 		$em = $this->getDoctrine()->getManager();
 
 		$projet = $em->getRepository('NOGestionnaireBundle:Projet')->find($id);
-		$tache = $em->getRepository('NOGestionnaireBundle:Tache')->findBy(array('projets' => $id), array('ordre' => 'asc'));
+		// $tache = $em->getRepository('NOGestionnaireBundle:Tache')->findBy(array('projet' => $id), array('ordre' => 'asc'));
+		$sommeJoursVendus = $em->getRepository('NOGestionnaireBundle:NbJourVendus')->sommeJoursVendus($id);
+		// dump($sommeJoursVendus);
+		// die;
 
 		return $this->render('NOGestionnaireBundle:Projet:suivi.html.twig', array(
-			'projets' => $projet,
-			'taches' => $tache,
+			'projet' => $projet,
+			// 'taches' => $tache,
+			'sommes' => $sommeJoursVendus,
 		));
+	}
+
+	public function FunctionName($value='')
+	{
+			
 	}
 	public function ajoutAction(Request $request)
 	{
@@ -214,7 +224,7 @@ class ProjetController extends Controller
 
 		$projet = $em->getRepository('NOGestionnaireBundle:Projet')->find($idProjet);
 		$profilsProjet = $em->getRepository('NOGestionnaireBundle:GrilleTarif')->findBy(array('projet' => $idProjet), array());
-		$listeTaches = $em->getRepository('NOGestionnaireBundle:Tache')->findBy(array('projets' => $idProjet), array('ordre' => 'asc'));
+		$listeTaches = $em->getRepository('NOGestionnaireBundle:Tache')->findBy(array('projet' => $idProjet), array('ordre' => 'asc'));
 
 		return $this->render('NOGestionnaireBundle:Projet:joursVendus.html.twig', array(
     		'projet' => $projet,

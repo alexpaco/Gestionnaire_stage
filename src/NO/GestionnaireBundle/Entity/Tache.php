@@ -40,7 +40,7 @@ class Tache
     /**
      * @var \NO\GestionnaireBundle\Entity\Projet
      */
-    private $projets;
+    private $projet;
     
     /**
      * @var \NO\GestionnaireBundle\Entity\Tache
@@ -184,9 +184,9 @@ class Tache
      *
      * @return Tache
      */
-    public function setProjets(\NO\GestionnaireBundle\Entity\Projet $projets = null)
+    public function setProjet(\NO\GestionnaireBundle\Entity\Projet $projet = null)
     {
-        $this->projets = $projets;
+        $this->projet = $projet;
 
         return $this;
     }
@@ -196,9 +196,9 @@ class Tache
      *
      * @return \NO\GestionnaireBundle\Entity\Projet
      */
-    public function getProjets()
+    public function getProjet()
     {
-        return $this->projets;
+        return $this->projet;
     }
 
 
@@ -278,6 +278,55 @@ class Tache
 
         foreach ($this->getJoursVendus() as $jourVendus) {
             $somme += $jourVendus->getJoursVendus();
+        }
+        return $somme;
+    }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $tacheEnfants;
+
+
+    /**
+     * Add tacheEnfant
+     *
+     * @param \NO\GestionnaireBundle\Entity\Tache $tacheEnfant
+     *
+     * @return Tache
+     */
+    public function addTacheEnfant(\NO\GestionnaireBundle\Entity\Tache $tacheEnfant)
+    {
+        $this->tacheEnfants[] = $tacheEnfant;
+
+        return $this;
+    }
+
+    /**
+     * Remove tacheEnfant
+     *
+     * @param \NO\GestionnaireBundle\Entity\Tache $tacheEnfant
+     */
+    public function removeTacheEnfant(\NO\GestionnaireBundle\Entity\Tache $tacheEnfant)
+    {
+        $this->tacheEnfants->removeElement($tacheEnfant);
+    }
+
+    /**
+     * Get tacheEnfants
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTacheEnfants()
+    {
+        return $this->tacheEnfants;
+    }
+
+    public function sommeTachesEnfants()
+    {
+        $somme = 0;
+
+        foreach ($this->getTacheEnfants() as $tache) {
+            $somme += $tache->nbJoursVendus();
         }
         return $somme;
     }

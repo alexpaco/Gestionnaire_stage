@@ -1,5 +1,6 @@
 NO\GestionnaireBundle\Entity\NbJourVendus:
   type: entity
+  repositoryClass: NO\GestionnaireBundle\Repository\NbJourVendusRepository
   table: nbJourVendus
   id:
     id:

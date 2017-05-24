@@ -32,13 +32,14 @@ NO\GestionnaireBundle\Entity\Tache:
       nullable: true
       column: raf
   manyToOne:
-    projets:
+    projet:
       targetEntity: NO\GestionnaireBundle\Entity\Projet
       joinColumn:
         name: projet_id
         referencedColumnName: id
     tacheMeres:
       targetEntity: NO\GestionnaireBundle\Entity\Tache
+      inversedBy: tacheEnfants
       joinColumn:
         name: tache_mere_id
         referencedColumnName: id
@@ -46,4 +47,7 @@ NO\GestionnaireBundle\Entity\Tache:
     joursVendus:
       targetEntity: NO\GestionnaireBundle\Entity\NbJourVendus
       mappedBy: tache
+    tacheEnfants:
+      targetEntity: NO\GestionnaireBundle\Entity\Tache
+      mappedBy: tacheMeres
           

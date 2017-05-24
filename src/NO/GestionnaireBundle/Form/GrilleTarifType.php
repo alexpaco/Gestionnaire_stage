@@ -5,7 +5,7 @@ namespace NO\GestionnaireBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
@@ -16,7 +16,7 @@ class GrilleTarifType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('tarif', NumberType::class)
+        $builder->add('tarif', IntegerType::class)
                 ->add('profil', EntityType::class, array(
                     'class' => 'NOGestionnaireBundle:Profil',
                     'choice_label' => 'nomProfil',

@@ -17,7 +17,8 @@ class NbJourVendusType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $enfant ='null';
+        $enfant = null;
+
         $builder->add('joursVendus', NumberType::class)
                 ->add('tache', EntityType::class, array(
                     'class' => 'NOGestionnaireBundle:Tache',

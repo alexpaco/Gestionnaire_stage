@@ -1,40 +1,33 @@
 {%extends "NOGestionnaireBundle::layout.html.twig" %}
 {% block title %}
-	{{ projets.nomProjet }} - suivi - {{ parent() }}
+	{{ projet.nomProjet }} - suivi - {{ parent() }}
 {% endblock %}
 
 {% block body %}
 	<h3>Suivi de projet</h3>
 	<table class="table table-bordered table-condensed">
 		<tr class="info">
-			<th style="width: 80%; text-align: center;">{{ projets.NomProjet }}</th>
+			<th style="width: 80%; text-align: center;">{{ projet.NomProjet }}</th>
 			<th style="width: 5%">Vendus</th>
 			<th style="width: 5%">Réalisés</th>
 			<th style="width: 5%">RAF</th>
 			<th style="width: 5%">Solde</th>
 		</tr>
-		{% for tache in taches %}
-			{% if tache.tacheMeres == null and tache.projets.id == projets.id %}
-				<tr class="active text-primary">
-					<td>{{ tache.nomTache }}</td>
-					<td></td>
-					<td>{{ tache.joursRealises }}</td>
-					<td>{{ tache.raf }}</td>
-					<td></td>
-				</tr>
-			{% elseif tache.niveau == 2 and tache.projets.id == projets.id %}
-				<tr>
-					<td>{{ tache.nomTache }}</td>
-					<td></td>
-					<td>{{ tache.joursRealises }}</td>
-					<td>{{ tache.raf }}</td>
-					<td></td>
-				</tr>
-			{% endif %}	
+		{{dump(sommes)}}
+	{% for somme in sommes %}	
+			<tr class="{{ somme[0].tacheMeres == null ? 'active text-primary' : '' }}">
+				<td>{{ somme[0].nomTache }}</td>
+				<td>
+					{{ somme[0].niveau == 2 ? somme.somme: somme[0].sommeTachesEnfants}}
+				</td>
+				<td>{{ somme[0].joursRealises }}</td>
+				<td>{{ somme[0].raf }}</td>
+				<td></td>
+			</tr>		
 	{% endfor %}		
 	</table>	
 	<a href="{{ path('no_gestionnaire_homepage') }}" class="btn btn-default"><i class="glyphicon glyphicon-chevron-left"></i> Retour à l'accueil</a>
-	<a href="{{ path('no_gestionnaire_ajout_taches', { 'id': projets.id }) }}" class="btn btn-info"><i class="glyphicon glyphicon-plus"></i> Ajouter une tâche</a>
-	<a href="{{ path('no_gestionnaire_tarif', { 'id': projets.id }) }}" class="btn btn-info"><i class="glyphicon glyphicon-plus"></i> Ajouter un tarif</a>
-	<a href="{{ path('no_gestionnaire_jours_vendus', { 'idProjet': projets.id }) }}" class="btn btn-info"><i class="glyphicon glyphicon-plus"></i> Jours Vendus</a>
+	<a href="{{ path('no_gestionnaire_ajout_taches', { 'id': projet.id }) }}" class="btn btn-info"><i class="glyphicon glyphicon-plus"></i> Ajouter une tâche</a>
+	<a href="{{ path('no_gestionnaire_tarif', { 'id': projet.id }) }}" class="btn btn-info"><i class="glyphicon glyphicon-plus"></i> Ajouter un tarif</a>
+	<a href="{{ path('no_gestionnaire_jours_vendus', { 'idProjet': projet.id }) }}" class="btn btn-info"><i class="glyphicon glyphicon-plus"></i> Jours Vendus</a>
 {% endblock %}
