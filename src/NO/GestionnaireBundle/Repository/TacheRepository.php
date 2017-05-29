@@ -29,14 +29,14 @@ class TacheRepository extends \Doctrine\ORM\EntityRepository
 
 	public function afficheToutesLesTaches($page, $nbParPage)
 	{
-		$query = $this->_em->createQueryBuilder()
+		$query = $this->createQueryBuilder('ta')
 					->select('ta')
-					->from('NOGestionnaireBundle:Tache', 'ta')
 					->where('ta.tacheMeres is not null')
+					->orderBy('ta.ordre', 'ASC')
 					->getQuery()
 					->setFirstResult(($page-1) * $nbParPage)
 					->setMaxResults($nbParPage);
 
-		return new Paginator($query, true);
+		return new Paginator($query, false);
 	}
 }

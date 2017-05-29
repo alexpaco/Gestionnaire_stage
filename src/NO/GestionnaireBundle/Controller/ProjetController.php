@@ -226,7 +226,7 @@ class ProjetController extends Controller
 			throw $this->createNotFoundException("La page ".$page." n'existe pas.");
 		}
 
-		$nbParPage = 5;
+		$nbParPage = 7;
 
 		$em = $this->getDoctrine()->getManager();
 
