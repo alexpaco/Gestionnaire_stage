@@ -19,9 +19,9 @@ class NbJourVendusRepository extends \Doctrine\ORM\EntityRepository
 								->addSelect('sum(nb.joursVendus) as somme')
 								->where('ta.projet = :idProjet')
 								->groupBy('ta.id')
-								->orderBy('ta.ordre')
+								->orderBy('ta.niveau')
 								->addOrderBy('ta.tacheMeres')
-								->addOrderBy('ta.nomTache', 'ASC')
+								->addOrderBy('ta.ordre')
 								->setParameter('idProjet', $idProjet)
 								->getQuery();
 		return $somme->getResult();

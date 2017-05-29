@@ -14,46 +14,16 @@
 			{% endfor %}
 		</tr>
 		{% for tache in taches %}
-			{% if tache.niveau >= 2 %}
+			{% if tache.tacheMeres is not null %}
 				<tr>
 					<td>{{ tache.nomTache }}</td>
-				{# {% for jour in tache.joursVendus %} #}
-					{# <td>{{ jour.joursVendus|number_format(0, '.') }}</td> #}
-				{# {% endfor %} #}
 				{% for profil in profilsProjets %}
-					{# <td><input type="text" placeholder="pourquoi?"></td> #}
 					<td>{{ render(controller('NOGestionnaireBundle:Projet:createForm', { 'tacheId': tache.id , 'profilId': profil.profil.id, 'idProjet': projet.id})) }}</td>
-					{# <td>{{ render(url('no_gestionnaire_jours_vendus_add', { 'tacheId': tache.id , 'profilId': profil.profil.id, 'idProjet': projet.id})) }}</td> #}
 				{% endfor %}
 				</tr>
 			{% endif %}
 		{% endfor %}
 	</table>
-	</div>
-	<div class="col-sm-12">
-	<ul class="pagination">
-		{% if page > 1 %}
-			<li>
-				<a href="{{path('no_gestionnaire_jours_vendus', { 'idProjet': projet.id, 'page': 1 }) }}"> << </a>
-			</li>
-			<li>
-				<a href="{{path('no_gestionnaire_jours_vendus', { 'idProjet': projet.id, 'page': page-1  }) }}"> < </a>
-			</li>
-		{% endif %}
-		{% for p in range(1, nbPages) %}
-			<li {% if p == page %} class="active" {% endif %}>
-				<a href="{{path('no_gestionnaire_jours_vendus', { 'idProjet': projet.id, 'page': p }) }}">{{ p }}</a>
-			</li>
-		{% endfor %}
-		{% if page < nbPages %}
-			<li>
-				<a href="{{path('no_gestionnaire_jours_vendus', { 'idProjet': projet.id, 'page': page+1 }) }}"> > </a>
-			</li>
-			<li>
-				<a href="{{path('no_gestionnaire_jours_vendus', { 'idProjet': projet.id, 'page': nbPages }) }}"> >> </a>
-			</li>
-		{% endif %}
-	</ul>
 	</div>
 	<a href="{{ path('no_gestionnaire_suivi', {'id': projet.id}) }}" class="btn btn-default"><i class="glyphicon glyphicon-chevron-left"></i> Retour au suivi du projet</a>
 {% endblock %}

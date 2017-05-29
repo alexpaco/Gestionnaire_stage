@@ -17,16 +17,15 @@ class NbJourVendusType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $enfant = null;
 
         $builder->add('joursVendus', NumberType::class)
                 ->add('tache', EntityType::class, array(
                     'class' => 'NOGestionnaireBundle:Tache',
                     'choice_label' => 'nomTache',
                     'placeholder' => 'Choisi une tâche',
-                    'query_builder' => function(TacheRepository $repository) use($enfant)
+                    'query_builder' => function(TacheRepository $repository)
                     {
-                        return $repository->afficheTachesEnfant($enfant);
+                        return $repository->afficheTachesEnfant();
                     }
                 ))
                 ->add('profil', EntityType::class, array(

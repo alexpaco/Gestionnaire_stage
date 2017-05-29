@@ -11,32 +11,17 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
  */
 class TacheRepository extends \Doctrine\ORM\EntityRepository
 {
-	public function afficheTachesMeres($pattern)
+	public function afficheTachesMeres()
 	{
 		return $this
 			->createQueryBuilder('t')
-			->where('t.niveau = :pattern')
-			->setParameter('pattern', $pattern);
+			->where('t.tacheMeres is null');
 	}
 
-	public function afficheTachesEnfant($enfant)
+	public function afficheTachesEnfant()
 	{
 		return $this
 			->createQueryBuilder('te')
-			->where('te.tacheMeres != :enfant')
-			->setParameter('enfant', $enfant);
-	}
-
-	public function afficheToutesLesTaches($page, $nbParPage)
-	{
-		$query = $this->createQueryBuilder('ta')
-					->select('ta')
-					->where('ta.tacheMeres is not null')
-					->orderBy('ta.ordre', 'ASC')
-					->getQuery()
-					->setFirstResult(($page-1) * $nbParPage)
-					->setMaxResults($nbParPage);
-
-		return new Paginator($query, false);
+			->where('te.tacheMeres is not null');
 	}
 }

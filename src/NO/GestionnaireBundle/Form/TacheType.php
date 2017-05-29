@@ -18,7 +18,6 @@ class TacheType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $pattern = '1';
         $builder->add('nomTache', TextType::class)
                 ->add('niveau', NumberType::class)
                 ->add('ordre', NumberType::class, array(
@@ -29,9 +28,9 @@ class TacheType extends AbstractType
                     'choice_label' => 'nomTache',
                     'placeholder' => 'Choisi une tâche mère',
                     'required' => false,
-                    'query_builder' => function(TacheRepository $repository) use($pattern)
+                    'query_builder' => function(TacheRepository $repository)
                     {
-                        return $repository->afficheTachesMeres($pattern);
+                        return $repository->afficheTachesMeres();
                     }
                 ))
                 ->add('Ajouter', SubmitType::class);

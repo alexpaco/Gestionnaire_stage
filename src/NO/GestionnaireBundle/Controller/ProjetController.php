@@ -32,22 +32,14 @@ class ProjetController extends Controller
 		$em = $this->getDoctrine()->getManager();
 
 		$projet = $em->getRepository('NOGestionnaireBundle:Projet')->find($id);
-		// $tache = $em->getRepository('NOGestionnaireBundle:Tache')->findBy(array('projet' => $id), array('ordre' => 'asc'));
 		$sommeJoursVendus = $em->getRepository('NOGestionnaireBundle:NbJourVendus')->sommeJoursVendus($id);
-		// dump($sommeJoursVendus);
-		// die;
 
 		return $this->render('NOGestionnaireBundle:Projet:suivi.html.twig', array(
 			'projet' => $projet,
-			// 'taches' => $tache,
 			'sommes' => $sommeJoursVendus,
 		));
 	}
 
-	public function FunctionName($value='')
-	{
-			
-	}
 	public function ajoutAction(Request $request)
 	{
 		$em = $this->getDoctrine()->getManager();
@@ -97,7 +89,7 @@ class ProjetController extends Controller
 
 		$projet = $em->getRepository('NOGestionnaireBundle:Projet')->find($id);
 		$id = $projet->getId();
-		$listeTaches = $em->getRepository('NOGestionnaireBundle:Tache')->findBy(array(), array('ordre' => 'asc'));
+		$listeTaches = $em->getRepository('NOGestionnaireBundle:Tache')->findBy(array('projet' => $id), array('niveau' => 'ASC','tacheMeres' => 'ASC','ordre' => 'ASC'));
 
 		$formTache = $this->get('form.factory')->create(TacheType::class, $tache);
 		$tache->setProjet($projet);
@@ -218,35 +210,18 @@ class ProjetController extends Controller
     	));
 	}
 
-	public function joursVendusAction($idProjet, $page, Request $request)
+	public function joursVendusAction($idProjet, Request $request)
 	{
-
-		if($page < 1){
-
-			throw $this->createNotFoundException("La page ".$page." n'existe pas.");
-		}
-
-		$nbParPage = 7;
-
 		$em = $this->getDoctrine()->getManager();
 
 		$projet = $em->getRepository('NOGestionnaireBundle:Projet')->find($idProjet);
 		$profilsProjet = $em->getRepository('NOGestionnaireBundle:GrilleTarif')->findBy(array('projet' => $idProjet), array());
-		$listeTaches = $em->getRepository('NOGestionnaireBundle:Tache')->afficheToutesLesTaches($page, $nbParPage);
-
-		$nbPages = ceil(count($listeTaches) / $nbParPage);
-
-		if($page > $nbPages){
-
-			throw $this->createNotFoundException("La page". $page ."n'existe pas.");
-		}
+		$listeTaches = $em->getRepository('NOGestionnaireBundle:Tache')->findBy(array('projet' => $idProjet), array('niveau' => 'ASC','tacheMeres' => 'ASC','ordre' => 'ASC'));
 
 		return $this->render('NOGestionnaireBundle:Projet:joursVendus.html.twig', array(
     		'projet' => $projet,
     		'profilsProjets' => $profilsProjet,
     		'taches' => $listeTaches,
-    		'nbPages' => $nbPages,
-    		'page' => $page,
     	));
 	}
 

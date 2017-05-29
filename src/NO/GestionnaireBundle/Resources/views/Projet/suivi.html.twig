@@ -15,19 +15,19 @@
 		</tr>
 		{# {{dump(sommes)}} #}
 	{% for somme in sommes %}	
-			<tr class="{{ somme[0].tacheMeres == null ? 'active text-primary' : '' }}">
+			<tr class="{{ (somme[0].tacheMeres is null) ? 'active text-primary' : '' }}">
 				<td>{{ somme[0].nomTache }}</td>
 				<td>
-					{{ somme[0].niveau == 2 ? somme[0].nbJoursVendus: somme[0].sommeTachesEnfants}}
+					{{ (somme[0].tacheMeres is not null) ? somme[0].nbJoursVendus: somme[0].sommeTachesEnfants}}
 				</td>
 				<td>{{ somme[0].joursRealises }}</td>
 				<td>{{ somme[0].raf }}</td>
-				<td>{{ somme[0].realises is not defined ? '' : somme[0].nbJoursVendus - (somme[0].raf + somme[0].joursRealises) }}</td>
+				<td style="background-color: {{ (somme[0].nbJoursVendus - (somme[0].raf + somme[0].joursRealises) < 0) ? 'red' : (somme[0].nbJoursVendus - (somme[0].raf + somme[0].joursRealises) > 0) ? 'green' : 'white' }}">{{ (somme[0].realises is not defined) ? '0' : somme[0].nbJoursVendus - (somme[0].raf + somme[0].joursRealises) }}</td>
 			</tr>		
 	{% endfor %}		
 	</table>	
 	<a href="{{ path('no_gestionnaire_homepage') }}" class="btn btn-default"><i class="glyphicon glyphicon-chevron-left"></i> Retour à l'accueil</a>
 	<a href="{{ path('no_gestionnaire_ajout_taches', { 'id': projet.id }) }}" class="btn btn-info"><i class="glyphicon glyphicon-plus"></i> Ajouter une tâche</a>
 	<a href="{{ path('no_gestionnaire_tarif', { 'id': projet.id }) }}" class="btn btn-info"><i class="glyphicon glyphicon-plus"></i> Ajouter un tarif</a>
-	<a href="{{ path('no_gestionnaire_jours_vendus', { 'idProjet': projet.id, 'page': 1 }) }}" class="btn btn-info"><i class="glyphicon glyphicon-plus"></i> Jours Vendus</a>
+	<a href="{{ path('no_gestionnaire_jours_vendus', { 'idProjet': projet.id }) }}" class="btn btn-info"><i class="glyphicon glyphicon-plus"></i> Jours Vendus</a>
 {% endblock %}

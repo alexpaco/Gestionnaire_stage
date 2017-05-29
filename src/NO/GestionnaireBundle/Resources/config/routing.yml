@@ -22,11 +22,11 @@ no_gestionnaire_tarif:
     path:     /tarif/{id}
     defaults: { _controller: NOGestionnaireBundle:Projet:tarif }
 no_gestionnaire_jours_vendus:
-    path:     /jours_vendus/{idProjet}/{page}
+    path:     /jours_vendus/{idProjet}
     defaults: { _controller: NOGestionnaireBundle:Projet:joursVendus }
 no_gestionnaire_jours_vendus_add:
     path:     /jours_vendus/add/{tacheId}/{profilId}/{idProjet}
-    defaults: { _controller: NOGestionnaireBundle:Projet:createForm, page: 1 }
+    defaults: { _controller: NOGestionnaireBundle:Projet:createForm }
     requirements:
         tacheId: \d+
         profilId: \d+
