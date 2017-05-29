@@ -2,6 +2,7 @@
 
 namespace NO\GestionnaireBundle\Repository;
 
+use Doctrine\ORM\Tools\Pagination\Paginator;
 /**
  * TacheRepository
  *
@@ -24,5 +25,18 @@ class TacheRepository extends \Doctrine\ORM\EntityRepository
 			->createQueryBuilder('te')
 			->where('te.tacheMeres != :enfant')
 			->setParameter('enfant', $enfant);
+	}
+
+	public function afficheToutesLesTaches($page, $nbParPage)
+	{
+		$query = $this->_em->createQueryBuilder()
+					->select('ta')
+					->from('NOGestionnaireBundle:Tache', 'ta')
+					->where('ta.tacheMeres is not null')
+					->getQuery()
+					->setFirstResult(($page-1) * $nbParPage)
+					->setMaxResults($nbParPage);
+
+		return new Paginator($query, true);
 	}
 }

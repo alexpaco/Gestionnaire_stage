@@ -218,18 +218,35 @@ class ProjetController extends Controller
     	));
 	}
 
-	public function joursVendusAction($idProjet, Request $request)
+	public function joursVendusAction($idProjet, $page, Request $request)
 	{
+
+		if($page < 1){
+
+			throw $this->createNotFoundException("La page ".$page." n'existe pas.");
+		}
+
+		$nbParPage = 5;
+
 		$em = $this->getDoctrine()->getManager();
 
 		$projet = $em->getRepository('NOGestionnaireBundle:Projet')->find($idProjet);
 		$profilsProjet = $em->getRepository('NOGestionnaireBundle:GrilleTarif')->findBy(array('projet' => $idProjet), array());
-		$listeTaches = $em->getRepository('NOGestionnaireBundle:Tache')->findBy(array('projet' => $idProjet), array('ordre' => 'asc'));
+		$listeTaches = $em->getRepository('NOGestionnaireBundle:Tache')->afficheToutesLesTaches($page, $nbParPage);
+
+		$nbPages = ceil(count($listeTaches) / $nbParPage);
+
+		if($page > $nbPages){
+
+			throw $this->createNotFoundException("La page". $page ."n'existe pas.");
+		}
 
 		return $this->render('NOGestionnaireBundle:Projet:joursVendus.html.twig', array(
     		'projet' => $projet,
     		'profilsProjets' => $profilsProjet,
     		'taches' => $listeTaches,
+    		'nbPages' => $nbPages,
+    		'page' => $page,
     	));
 	}
 

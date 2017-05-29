@@ -21,7 +21,7 @@ class NbJourVendusRepository extends \Doctrine\ORM\EntityRepository
 								->groupBy('ta.id')
 								->orderBy('ta.ordre')
 								->addOrderBy('ta.tacheMeres')
-								->addOrderBy('somme', 'DESC')
+								->addOrderBy('ta.nomTache', 'ASC')
 								->setParameter('idProjet', $idProjet)
 								->getQuery();
 		return $somme->getResult();
