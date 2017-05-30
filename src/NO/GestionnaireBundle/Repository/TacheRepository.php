@@ -24,4 +24,15 @@ class TacheRepository extends \Doctrine\ORM\EntityRepository
 			->createQueryBuilder('te')
 			->where('te.tacheMeres is not null');
 	}
+
+	public function sommeRaf($idProjet)
+	{
+		$somme = $this->createQueryBuilder('ta')
+								->select('sum(ta.raf) as sommeRaf')
+								->addSelect('sum(ta.joursRealises) as sommeJoursRealises')
+								->where('ta.projet = :idProjet')
+								->setParameter('idProjet', $idProjet)
+								->getQuery();
+		return $somme->getResult();
+	}
 }

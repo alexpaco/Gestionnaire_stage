@@ -4,14 +4,16 @@ no_gestionnaire_homepage:
 no_gestionnaire_suivi:
     path:     /suivi_projet/{id}
     defaults: { _controller: NOGestionnaireBundle:Projet:suivi }
+    requirements:
+        id: \d+
 no_gestionnaire_ajout:
     path:     /ajout_projet
     defaults: { _controller: NOGestionnaireBundle:Projet:ajout }
 no_gestionnaire_modification:
-    path:     /modification_projet/{id}
+    path:     /modification_projet/{idTache}
     defaults: { _controller: NOGestionnaireBundle:Projet:modification }
     requirements:
-        id: \d+
+        idTache: \d+
 no_gestionnaire_admin:
     path:     /espace_admin
     defaults: { _controller: NOGestionnaireBundle:Projet:admin }

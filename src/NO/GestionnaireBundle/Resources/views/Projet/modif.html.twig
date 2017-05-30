@@ -5,10 +5,11 @@
 
 {% block body %}
 	<div class="col-lg-3">
-		<h4>Modifie le nom du pole choisi</h4>
+		<h3>Modification des jours réalisés et reste à faire</h3>
+		<h4>Nom de la tâche: {{ tache.nomTache }}</h4>
 		{{ form(form) }}
 	</div>
 	<div class="col-lg-12">
-		<a href="{{ path('no_gestionnaire_homepage') }}" class="btn btn-default"><i class="glyphicon glyphicon-chevron-left"></i>Retour à l'accueil</a>
+		<a href="{{ path('no_gestionnaire_suivi', {'id': tache.projet.id}) }}" class="btn btn-default"><i class="glyphicon glyphicon-chevron-left"></i>Retour à l'accueil</a>
 	</div>
 {% endblock %}

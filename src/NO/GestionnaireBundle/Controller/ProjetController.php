@@ -9,10 +9,10 @@ use NO\GestionnaireBundle\Form\ClientType;
 use NO\GestionnaireBundle\Form\GrilleTarifType;
 use NO\GestionnaireBundle\Form\NbJourVendusType;
 use NO\GestionnaireBundle\Form\PoleType;
-use NO\GestionnaireBundle\Form\PoleEditType;
 use NO\GestionnaireBundle\Form\ProfilType;
 use NO\GestionnaireBundle\Form\ProjetType;
 use NO\GestionnaireBundle\Form\TacheType;
+use NO\GestionnaireBundle\Form\TacheEditType;
 use NO\GestionnaireBundle\Form\TypologieType;
 use NO\GestionnaireBundle\Form\UserType;
 use NO\GestionnaireBundle\Entity\Client;
@@ -33,10 +33,18 @@ class ProjetController extends Controller
 
 		$projet = $em->getRepository('NOGestionnaireBundle:Projet')->find($id);
 		$sommeJoursVendus = $em->getRepository('NOGestionnaireBundle:NbJourVendus')->sommeJoursVendus($id);
+		$sommeRaf = $em->getRepository('NOGestionnaireBundle:Tache')->sommeRaf($id);
+		$sommeTotaleJoursVendus = $em->getRepository('NOGestionnaireBundle:NbJourVendus')->sommeTotaleJoursVendus($id);
+
+		// dump($sommeJoursVendus);
+		// dump($sommeTotaleJoursVendus);
+		// die;
 
 		return $this->render('NOGestionnaireBundle:Projet:suivi.html.twig', array(
 			'projet' => $projet,
 			'sommes' => $sommeJoursVendus,
+			'sommeRaf' => $sommeRaf,
+			'sommeTotaleJoursVendus' => $sommeTotaleJoursVendus,
 		));
 	}
 
@@ -60,23 +68,23 @@ class ProjetController extends Controller
 			'formProjet' => $formProjet->createView()
 		));
 	}
-	public function modificationAction($id, Request $request)
+	public function modificationAction($idTache, Request $request)
 	{
 		$em = $this->getDoctrine()->getManager();
 
-		$pole = $em->getRepository('NOGestionnaireBundle:Pole')->find($id);
+		$tache = $em->getRepository('NOGestionnaireBundle:Tache')->find($idTache);
 
-		$form = $this->get('form.factory')->create(PoleEditType::class, $pole);
+		$form = $this->get('form.factory')->create(TacheEditType::class, $tache);
 
 		if($request->isMethod('POST') && $form->handleRequest($request)->isSubmitted())
 		{
 			$em->flush();
 
-			return $this->redirectToRoute('no_gestionnaire_homepage');
+			return $this->redirectToRoute('no_gestionnaire_suivi', array('id' => $tache->getProjet()->getId()));
 		}
 
 		return $this->render('NOGestionnaireBundle:Projet:modif.html.twig', array(
-			'pole' => $pole,
+			'tache' => $tache,
 			'form' => $form->createView()
 		));
 	}

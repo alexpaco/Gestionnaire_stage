@@ -330,4 +330,24 @@ class Tache
         }
         return $somme;
     }
+
+    public function sommeRaf()
+    {
+        $somme = 0;
+
+        foreach ($this->getTacheEnfants() as $raf) {
+            $somme += $raf->getRaf();
+        }
+        return $somme;
+    }
+
+    public function sommeJoursRealises()
+    {
+        $somme = 0;
+
+        foreach ($this->getTacheEnfants() as $joursRea) {
+            $somme += $joursRea->getJoursRealises();
+        }
+        return $somme;
+    }
 }

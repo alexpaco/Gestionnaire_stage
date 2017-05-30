@@ -13,17 +13,26 @@ class NbJourVendusRepository extends \Doctrine\ORM\EntityRepository
 	public function sommeJoursVendus($idProjet)
 	{
 		$somme = $this->_em->createQueryBuilder()
-								->select('ta')
-								->from('NOGestionnaireBundle:Tache', 'ta')
-								->leftJoin('ta.joursVendus', 'nb')
-								->addSelect('sum(nb.joursVendus) as somme')
-								->where('ta.projet = :idProjet')
-								->groupBy('ta.id')
-								->orderBy('ta.niveau')
-								->addOrderBy('ta.tacheMeres')
-								->addOrderBy('ta.ordre')
-								->setParameter('idProjet', $idProjet)
-								->getQuery();
+							->select('ta')
+							->from('NOGestionnaireBundle:Tache', 'ta')
+							->where('ta.projet = :idProjet')
+							->groupBy('ta.id')
+							->orderBy('ta.niveau')
+							->addOrderBy('ta.tacheMeres')
+							->addOrderBy('ta.ordre')
+							->setParameter('idProjet', $idProjet)
+							->getQuery();
+		return $somme->getResult();
+	}
+
+	public function sommeTotaleJoursVendus($idProjet){
+
+		$somme = $this->createQueryBuilder('nb')
+						->select('sum(nb.joursVendus) as somme')
+						->leftJoin('nb.tache', 'ta')
+						->where('ta.projet = :idProjet')
+						->setParameter('idProjet', $idProjet)
+						->getQuery();
 		return $somme->getResult();
 	}
 }
