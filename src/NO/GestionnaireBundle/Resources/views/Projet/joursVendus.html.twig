@@ -18,12 +18,26 @@
 				<tr>
 					<td>{{ tache.nomTache }}</td>
 				{% for profil in profilsProjets %}
-					<td>{{ render(controller('NOGestionnaireBundle:Projet:createForm', { 'tacheId': tache.id , 'profilId': profil.profil.id, 'idProjet': projet.id})) }}</td>
+					<td>{{ render(controller('NOGestionnaireBundle:FormJoursVendus:createForm', { 'tacheId': tache.id , 'profilId': profil.profil.id, 'idProjet': projet.id})) }}</td>
 				{% endfor %}
 				</tr>
 			{% endif %}
 		{% endfor %}
+		<tr>
+			<td>
+				<form name="no_gestionnairebundle_nbjourvendus_create" method="post" action="">
+				<input type="submit" value="Tout valider" onclick="envoiForm('{{ path('no_gestionnaire_jours_vendus_create', {'idProjet': projet.id}) }}')">
+				</form>
+			</td>
+		</tr>
 	</table>
 	</div>
 	<a href="{{ path('no_gestionnaire_suivi', {'id': projet.id}) }}" class="btn btn-default"><i class="glyphicon glyphicon-chevron-left"></i> Retour au suivi du projet</a>
+
+	<script type="text/javascript">
+	function envoiForm(url){
+		document.no_gestionnairebundle_nbjourvendus_create.action = url;
+		document.no_gestionnairebundle_nbjourvendus_create.submit();
+	}
+	</script>
 {% endblock %}

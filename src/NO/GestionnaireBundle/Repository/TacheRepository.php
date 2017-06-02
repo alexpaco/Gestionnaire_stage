@@ -35,4 +35,19 @@ class TacheRepository extends \Doctrine\ORM\EntityRepository
 								->getQuery();
 		return $somme->getResult();
 	}
+
+	public function afficheTout($idProjet)
+	{
+		$affiche = $this->createQueryBuilder('ta')
+						->select('ta')
+						->leftJoin('ta.joursVendus', 'jv')
+						->addSelect('jv')
+						->where('ta.projet = :idProjet')
+						->andWhere('ta.tacheMeres is not null')
+						->orderBy('jv.tache')
+						->addOrderBy('jv.profil')
+						->setParameter('idProjet', $idProjet)
+						->getQuery();
+		return $affiche->getResult();
+	}
 }

@@ -1,0 +1,23 @@
+{%extends "NOGestionnaireBundle::layout.html.twig" %}
+{% block title %}
+	affichage - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+	<table class="table table-bordered table-condensed">
+		<tr>
+			<td>Tâches</td>
+			{% for profil in profils %}
+			<td>{{profil.profil.nomProfil}}</td>
+		{% endfor %}
+		</tr>
+		{% for tache in taches %}
+			<tr>
+				<td>{{ tache.nomTache }}</td>
+				{% for jour in tache.joursVendus %}
+				<td>{{ jour.joursVendus }}</td>
+			{% endfor %}
+			</tr>
+		{% endfor %}	
+	</table>
+{% endblock %}
