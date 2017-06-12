@@ -6,7 +6,9 @@
 {% block body %}
 	<div class="col-sm-7">
 	{{ include('NOGestionnaireBundle:Projet:formAjoutTaches.html.twig') }}
-	<a href="{{ path('no_gestionnaire_suivi', {'id': projet.id}) }}" class="btn btn-default"><i class="glyphicon glyphicon-chevron-left"></i> Retour au suivi du projet</a>
+	{% block bouton %}
+		<a href="{{ path('no_gestionnaire_suivi', {'id': projet.id}) }}" class="btn btn-default"><i class="glyphicon glyphicon-chevron-left"></i> Retour au suivi du projet</a>
+	{% endblock %}
 	</div>
 	<div class="col-sm-5">
 		<h3>Liste des tâches</h3>

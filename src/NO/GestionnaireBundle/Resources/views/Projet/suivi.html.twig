@@ -36,11 +36,11 @@
 			</tr>
 		</tfoot>			
 	</table>
-{% endblock %}
 {% block bouton %}
 	<a href="{{ path('no_gestionnaire_homepage') }}" class="btn btn-default"><i class="glyphicon glyphicon-chevron-left"></i> Retour à l'accueil</a>
 	<a href="{{ path('no_gestionnaire_tarif', { 'id': projet.id }) }}" class="btn btn-info"><i class="glyphicon glyphicon-plus"></i> Ajouter un tarif</a>
 	<a href="{{ path('no_gestionnaire_ajout_taches', { 'id': projet.id }) }}" class="btn btn-info"><i class="glyphicon glyphicon-plus"></i> Ajouter une tâche</a>
 	<a href="{{ path('no_gestionnaire_jours_vendus', { 'idProjet': projet.id }) }}" class="btn btn-info"><i class="glyphicon glyphicon-plus"></i> Jours Vendus</a>
 	<a href="{{ path('no_gestionnaire_affichage', { 'id': projet.id }) }}" class="btn btn-success">Affichage</a>
+{% endblock %}
 {% endblock %}

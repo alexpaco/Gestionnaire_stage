@@ -6,9 +6,9 @@
 	<div class="col-sm-9">
 		{{ include('NOGestionnaireBundle:Projet:formAdmin.html.twig') }}
 	</div>
-{% endblock %}
-{% block bouton %}
-	<div class="col-sm-12">
-		<a href="{{ path('no_gestionnaire_homepage') }}" class="btn btn-default"><i class="glyphicon glyphicon-chevron-left"></i>Retour à l'accueil</a>
-	</div>
+	{% block bouton %}
+		<div class="col-sm-12">
+			<a href="{{ path('no_gestionnaire_homepage') }}" class="btn btn-default"><i class="glyphicon glyphicon-chevron-left"></i>Retour à l'accueil</a>
+		</div>
+	{% endblock %}
 {% endblock %}
