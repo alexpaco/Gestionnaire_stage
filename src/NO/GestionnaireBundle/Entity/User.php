@@ -3,6 +3,7 @@
 namespace NO\GestionnaireBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+
 /**
  * User
  */

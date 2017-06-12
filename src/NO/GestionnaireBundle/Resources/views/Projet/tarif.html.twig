@@ -9,5 +9,7 @@
 	{% for tarif in tarifs %}
 		<p>{{ tarif.profil.nomProfil }} {{ tarif.tarif }} €</p>
 	{% endfor %}
+{% endblock %}
+{% block bouton %}
 	<a href="{{ path('no_gestionnaire_suivi', {'id': projet.id}) }}" class="btn btn-default"><i class="glyphicon glyphicon-chevron-left"></i> Retour au suivi du projet</a>
 {% endblock %}

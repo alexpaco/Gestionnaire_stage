@@ -13,7 +13,7 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-lg-2">
-				<h3>Projets</h3>
+				<h3>Menu</h3>
 				<div class="well">
 					{{ render(controller('NOGestionnaireBundle:Menu:menu')) }}
 					<hr>
@@ -26,6 +26,8 @@
 			<div class="col-lg-10">
 				{% block body %}
 				{% endblock %}
+				{% block bouton %}
+				{% endblock %}	
 			</div>
 		</div>	
 	</div>

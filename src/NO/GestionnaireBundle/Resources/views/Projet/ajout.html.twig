@@ -2,9 +2,9 @@
 {% block title %}
 	Ajout d'un projet - {{ parent() }}
 {% endblock %}
-
-{% block body %}
-	
-	{{ include('NOGestionnaireBundle:Projet:formAjoutProjet.html.twig') }}
+{% block bouton %}
 	<a href="{{ path('no_gestionnaire_homepage') }}" class="btn btn-default"><i class="glyphicon glyphicon-chevron-left"></i>Retour à l'accueil</a>
+{% endblock %}	
+{% block body %}
+	{{ include('NOGestionnaireBundle:Projet:formAjoutProjet.html.twig') }}
 {% endblock %}

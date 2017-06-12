@@ -8,16 +8,16 @@
 		<tr>
 			<td>Tâches</td>
 			{% for profil in profils %}
-			<td>{{profil.profil.nomProfil}}</td>
-		{% endfor %}
+				<td>{{profil.profil.nomProfil}}</td>
+			{% endfor %}
 		</tr>
 		{% for tache in taches %}
 			<tr>
 				<td>{{ tache.nomTache }}</td>
 				{% for jour in tache.joursVendus %}
-				<td>{{ jour.joursVendus }}</td>
-			{% endfor %}
+					<td>{{ jour.joursVendus }}</td>
+				{% endfor %}
 			</tr>
-		{% endfor %}	
+		{% endfor %}
 	</table>
 {% endblock %}

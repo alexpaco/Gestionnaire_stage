@@ -1,0 +1,9 @@
+NO\GestionnaireBundle\Entity\UserFos:
+    type: entity
+    table: fos_user
+    repositoryClass: NO\GestionnaireBundle\Repository\UserFosRepository
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO

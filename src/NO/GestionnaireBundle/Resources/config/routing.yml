@@ -18,7 +18,7 @@ no_gestionnaire_ajout_taches:
     requirements:
         id: \d+
 no_gestionnaire_modification:
-    path:     /modification_projet/{idTache}
+    path:     /modification_tache/{idTache}
     defaults: { _controller: NOGestionnaireBundle:Tache:modificationTache }
     requirements:
         idTache: \d+

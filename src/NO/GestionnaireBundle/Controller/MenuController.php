@@ -12,10 +12,7 @@ class MenuController extends Controller
 
 		$projets = $em->getRepository('NOGestionnaireBundle:Projet')->findBy(array(), array('nomProjet' => 'asc'));
 
-    	$poles = $em->getRepository('NOGestionnaireBundle:Pole')->findBy(array(), array('nomPole' => 'asc'));
-
         return $this->render('NOGestionnaireBundle:Projet:menu.html.twig', array(
-        	'poles' => $poles,
         	'projets' => $projets,
         ));
 	}
