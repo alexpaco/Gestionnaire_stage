@@ -1,0 +1,24 @@
+<h3>Ajout d'un profil avec son tarif</h3>
+
+<div class="well">
+	{{ form_start(formTarif, {'attr': {'class': 'form-horizontal'}}) }}
+	{{ form_errors(formTarif) }}
+	<div class="form-group">
+		{{ form_label(formTarif.profil, 'Profil', {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+		{{ form_errors(formTarif.profil) }}
+		<div class="col-sm-9">
+			{{ form_widget(formTarif.profil) }}
+		</div>
+	</div>
+	<div class="form-group">
+		{{ form_label(formTarif.tarif, 'Profil', {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+		{{ form_errors(formTarif.tarif) }}
+		<div class="col-sm-9">
+			{{ form_widget(formTarif.tarif) }}
+		</div>
+	</div>
+	{{ form_widget(formTarif.Ajouter, {'attr': {'class': 'btn btn-primary'}}) }}
+
+	{{ form_rest(formTarif) }}
+	{{ form_end(formTarif) }}
+</div>
