@@ -18,7 +18,13 @@
 		<tbody>
 			{% for somme in sommes %}	
 				<tr class="{{ (somme.tacheMeres is null) ? 'active text-primary' : '' }}">
-					<td><a href="{{ path('no_gestionnaire_modification', {'idTache': somme.id}) }}" style="color: {{ (somme.tacheMeres is not null) ? 'black' : '' }}">{{ somme.nomTache }}</a></td>
+					<td>
+						{% if somme.tacheMeres is not null %}
+						<a href="{{ path('no_gestionnaire_modification', {'idTache': somme.id}) }}" style='color:black'>{{ somme.nomTache }}</a>
+						{% else %}
+							{{ somme.nomTache }}
+						{% endif %}
+					</td>
 					<td>{{ (somme.tacheMeres is not null) ? somme.nbJoursVendus : somme.sommeTachesEnfants }}</td>
 					<td>{{ (somme.tacheMeres is not null) ? somme.joursRealises : somme.sommeJoursRealises }}</td>
 					<td>{{ (somme.tacheMeres is not null) ? somme.raf : somme.sommeRaf }}</td>
