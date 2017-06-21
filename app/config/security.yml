@@ -33,10 +33,10 @@ security:
 
     access_control:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/register, role: ROLE_SUPER_ADMIN }
+        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/ajout_projet, role: ROLE_ADMIN }
-        - { path: ^/espace_admin, role: ROLE_SUPER_ADMIN}
+        # - { path: ^/ajout_projet, role: ROLE_ADMIN }
+        # - { path: ^/espace_admin, role: ROLE_SUPER_ADMIN}
 
             # activate different ways to authenticate
 

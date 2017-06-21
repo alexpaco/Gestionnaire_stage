@@ -1,6 +1,10 @@
+no_user:
+    resource: "@NOUserBundle/Resources/config/routing.yml"
+    prefix:   /
+
 no_gestionnaire:
     resource: "@NOGestionnaireBundle/Resources/config/routing.yml"
     prefix:   /
 
-for_user:
+fos_user:
    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
